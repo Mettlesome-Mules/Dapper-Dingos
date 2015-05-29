@@ -59,9 +59,9 @@ angular.module('core').service('Menus', [
 		this.addMenu = function(menuId, isPublic, roles) {
 			// Create the new menu
 			this.menus[menuId] = {
-				isPublic: isPublic || false,
+				isPublic: isPublic || true,
 				roles: roles || this.defaultRoles,
-				items: [],
+				items: [''],
 				shouldRender: shouldRender
 			};
 
@@ -81,6 +81,7 @@ angular.module('core').service('Menus', [
 		// Add menu item object
 		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position) {
 			// Validate that the menu exists
+			console.log('validating')
 			this.validateMenuExistance(menuId);
 
 			// Push new menu item

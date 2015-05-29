@@ -1,3 +1,6 @@
+body{
+	background-image: url('http://s3.amazonaws.com/digitaltrends-uploads-prod/2014/10/Multiple-screens-Google-X-project.jpg');
+}
 .content {
 	margin-top: 50px;
 }
@@ -12,4 +15,30 @@
 }
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
+}
+.btn{
+	left-margin: 500px;
+	top: auto;
+}
+.jumbotron{
+	opacity: 0.8;
+	margin: 50px;
+	padding: 20px;
+}
+.hometext{
+	font-size: 45px;
+	opacity: 1;
+}
+
+.homebtn{
+	text-align: center;
+	width: 100%;
+	left: 50%;
+	top:50%;
+}
+
+.btn{
+	background-color: #dcdcdc;
+	font-size: 24px;
+	opacity: 0.8
 }

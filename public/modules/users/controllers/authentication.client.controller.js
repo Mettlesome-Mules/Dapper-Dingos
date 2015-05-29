@@ -4,6 +4,10 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 	function($scope, $http, $location, Authentication) {
 		$scope.authentication = Authentication;
 
+		$scope.logout = function(){
+			
+		};
+
 		// If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/');
 
@@ -18,6 +22,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$scope.error = response.message;
 			});
 		};
+
 
 		$scope.signin = function() {
 			$http.post('/auth/signin', $scope.credentials).success(function(response) {
