@@ -15,6 +15,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 		});
 	}
 ])
+
 .directive('youtube', 
 	function($window) {
 	  return {
@@ -36,6 +37,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 	      var player;
+	      //var searchVideos;
 
 	      $window.onYouTubeIframeAPIReady = function() {
 	        player = new YT.Player(element.children()[0], {
@@ -53,7 +55,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
          	  },
           	  height: scope.height,
               width: scope.width,
-              videoId: 'QH2-TGUlwu4'
+              videoId: 'QH2-TGUlwu4' //set to searchVideos
        		});
 	      };
 	    },  

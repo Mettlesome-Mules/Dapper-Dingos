@@ -1,14 +1,44 @@
 <section data-ng-controller="mainController">
 
 <div class="container" data-ng-controller="mainController">
-	<div class="navbar-header">
-		<a href="/#!/main" class="navbar-brand">THIS IS THE MAIN PAGE</a>
-	</div>
+	<div class="navbar-header"></div>
 
 	<nav class="collapse navbar-collapse" role="navigation">
 
-	<div class='youtube'>
-		<youtube  width="640" height="390" videoid="M7lc1UVf-VE"></youtube>
-	</nav>
-</div>
+		<div class='youtube'>
+			<youtube  width="640" height="390" videoid="M7lc1UVf-VE"></youtube>
+				<div class="searchYT">
+					This is where the Youtube search will go
+				</div>
+		</nav>
+	</div>
+
+	<div class="chatUsersContainer">
+		<div class="chatBarUsers">
+			This is where a list of users will appear (pending: webcam)
+		</div>
+	</div>
+
+	<div class="chatContainer">
+		<div class="chatBar">
+			<div ng-controller='chatController'>
+				<!-- <input type="text" ng-model='userName' placeholder='Enter a username'>
+				<br> -->
+				<input type="text" ng-enter='sendMessage()' ng-model='message' placeholder='Type message here' size='25'></input>
+				<br>
+				<button size='50' ng-click='sendMessage()'>Submit</button>
+				<br>
+				<!-- <p>Filter Messages:
+				<input type="text" ng-model='filterText'>
+				<ul>
+					<li ng-repeat='text in messages | filter : filterText'>
+						<p>{{text.username}} - {{text.message}}</p>
+					</li>
+				</ul> -->
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src ="chat.client.controller.js"></script>
+
 </section>
