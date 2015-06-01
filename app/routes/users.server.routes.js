@@ -18,7 +18,13 @@ module.exports = function(app) {
 	app.route('/auth/google').get(passport.authenticate('google', {
 		scope: [
 			'https://www.googleapis.com/auth/userinfo.profile',
-			'https://www.googleapis.com/auth/userinfo.email'
+			'https://www.googleapis.com/auth/userinfo.email',
+			'https://www.googleapis.com/auth/youtube',
+			'https://www.googleapis.com/auth/youtube.force-ssl',
+			'https://www.googleapis.com/auth/youtube.readonly',
+			'https://www.googleapis.com/auth/youtube.upload',
+			'https://www.googleapis.com/auth/youtubepartner',
+			'https://www.googleapis.com/auth/youtubepartner-channel-audit'
 		]
 	}));
 	app.route('/auth/google/callback').get(users.oauthCallback('google'));
