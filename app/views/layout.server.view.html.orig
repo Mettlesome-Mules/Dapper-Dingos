@@ -32,7 +32,11 @@
 	<meta name="twitter:image" content="/img/brand/logo.png">
 
 	<!-- Fav Icon -->
+<<<<<<< HEAD
 	<link href="https://avatars1.githubusercontent.com/u/12634604?v=3&s=200" rel="shortcut icon" type="image/x-icon">
+=======
+	<link href="http://www.cutenessoverflow.com/wp-content/uploads/2014/04/red-panda-15.jpg" rel="shortcut icon" type="image/x-icon">
+>>>>>>> a563b0993c9d3424455d4f308a864975573440b0
 
 	<!--Application CSS Files-->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
