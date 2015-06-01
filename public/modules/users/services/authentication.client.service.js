@@ -3,12 +3,12 @@
 // Authentication service for user variables
 angular.module('users').factory('Authentication', [
 	function() {
-		var _this = this;
+		var that = this;
 
-		_this._data = {
+		that._data = {
 			user: window.user
 		};
 
-		return _this._data;
+		return that._data;
 	}
 ]);
