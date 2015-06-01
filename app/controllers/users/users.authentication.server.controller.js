@@ -98,7 +98,7 @@ exports.oauthCallback = function(strategy) {
 };
 
 /**
- * Helper function to save or update a OAuth user profile
+ * Helper function to save or update an OAuth user profile
  */
 exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 	if (!req.user) {
