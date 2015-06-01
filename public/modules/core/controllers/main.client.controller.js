@@ -8,17 +8,19 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
 		};
-angular.module('core').directive('youtube', 
-	function($window) {
-	  return {
-	    restrict: "E",
 
 		// Collapsing the menu after navigation
 		$scope.$on('$stateChangeSuccess', function() {
 			$scope.isCollapsed = false;
 		});
 	}
-]);
+])
+.directive('youtube', 
+	function($window) {
+	  return {
+	    restrict: "E",
+
+
 	    scope: {
       		height:   "@",
       		width:    "@",
