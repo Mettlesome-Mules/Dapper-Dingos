@@ -55,7 +55,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
          	  },
           	  height: scope.height,
               width: scope.width,
-              videoId: 'QH2-TGUlwu4' //set to searchVideos
+              videoId: 'AXwGVXD7qEQ' //set to searchVideos
        		});
 	      };
 	    },  
