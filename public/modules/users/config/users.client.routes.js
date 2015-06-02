@@ -12,6 +12,10 @@ angular.module('users').config(['$stateProvider',
 		state('signin', {
 			url: '/signin',
 			templateUrl: 'modules/users/views/authentication/signin.client.view.html'
+		}).
+		state('main', {
+			url: '/main',
+			templateUrl: 'modules/core/views/mainView.html'
 		})
 	}
 ]);

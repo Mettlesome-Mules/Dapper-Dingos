@@ -46,8 +46,55 @@ body{
 
 .youtube{
 	text-align: center;
-  		position: absolute;
-  		top: 50%;
-  		left: 50%;
-  		transform: translate(-50%, -50%);
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin-top: 25px;
 }
+
+.chatBar{
+	background-color: white;
+	color: black;
+	float: right;
+	border: black 1px solid;
+	width: 225px;
+	height: 391px;
+	display: block;
+	margin-top: 23px;
+}
+
+.chatBarUsers{
+	background-color: teal;
+	color: black;
+	float: left;
+	border: black 1px solid;
+	width: 225px;
+	height: 391px;
+	margin-top: 23px;
+}
+
+.chatContainer{
+	width: 225px;
+	height: 900px;
+	float: right;
+}
+
+.chatUsersContainer{
+	width: 225px;
+	height: 900px;
+	float: left;
+}
+
+.searchYT{
+	margin: 0 auto;
+	display: table;
+	height: 50px;
+	background-color: gray;
+	/*position: absolute;*/
+  /*bottom: 200px;*/
+  clear: both;
+  border: black 1px solid;
+}
+
+

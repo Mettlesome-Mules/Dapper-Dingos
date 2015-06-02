@@ -1,7 +1,22 @@
 'use strict';
 
+angular.module('core').controller('mainController', ['$scope', 'Menus',
+	function($scope, Menus) {
+		$scope.isCollapsed = false;
+		$scope.menu = Menus.getMenu('topbar');
 
-angular.module('core').directive('youtube', 
+		$scope.toggleCollapsibleMenu = function() {
+			$scope.isCollapsed = !$scope.isCollapsed;
+		};
+
+		// Collapsing the menu after navigation
+		$scope.$on('$stateChangeSuccess', function() {
+			$scope.isCollapsed = false;
+		});
+	}
+])
+
+.directive('youtube', 
 	function($window) {
 	  return {
 	    restrict: "E",
@@ -22,6 +37,7 @@ angular.module('core').directive('youtube',
 	      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 	      var player;
+	      //var searchVideos;
 
 	      $window.onYouTubeIframeAPIReady = function() {
 	        player = new YT.Player(element.children()[0], {
@@ -39,7 +55,7 @@ angular.module('core').directive('youtube',
          	  },
           	  height: scope.height,
               width: scope.width,
-              videoId: 'QH2-TGUlwu4'
+              videoId: 'AXwGVXD7qEQ' //set to searchVideos
        		});
 	      };
 	    },  
