@@ -55,9 +55,31 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
          	  },
           	  height: scope.height,
               width: scope.width,
-              videoId: 'AXwGVXD7qEQ' //set to searchVideos
+              videoId: 'AXwGVXD7qEQ', //set to searchVideos
+              events: {
+              	'onReady': onPlayerReady,
+              	'onStateChange': onPlayerStateChange
+              }
        		});
 	      };
 	    },  
 	  }
 	});
+
+	    function onPlayerStateChange(event){
+
+	// If player is Playing
+			if (event.data === 1) {
+				console.log('playing')
+				}
+			
+	//If Player is paused
+			if (event.data === 2) {
+				console.log('paused')
+				}
+			}
+	//
+
+		   function onPlayerReady(event){
+		   	console.log('player ready')
+		};
