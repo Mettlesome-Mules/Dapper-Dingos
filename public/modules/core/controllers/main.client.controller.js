@@ -66,11 +66,22 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	  }
 	});
 
+
+
+				var socket = io.connect();
+				
+
+
 	    function onPlayerStateChange(event){
+	    	
+	    	var socket = io.connect();
 
 	// If player is Playing
 			if (event.data === 1) {
 				console.log('playing')
+
+						socket.emit('hi', console.log('emitting hi'));
+					
 				}
 			
 	//If Player is paused
