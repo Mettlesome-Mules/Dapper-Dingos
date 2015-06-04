@@ -32,11 +32,7 @@
 	<meta name="twitter:image" content="/img/brand/logo.png">
 
 	<!-- Fav Icon -->
-<<<<<<< HEAD
 	<link href="https://avatars1.githubusercontent.com/u/12634604?v=3&s=200" rel="shortcut icon" type="image/x-icon">
-=======
-	<link href="http://www.cutenessoverflow.com/wp-content/uploads/2014/04/red-panda-15.jpg" rel="shortcut icon" type="image/x-icon">
->>>>>>> a563b0993c9d3424455d4f308a864975573440b0
 
 	<!--Application CSS Files-->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
@@ -68,8 +64,20 @@
 	<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
 	{% endif %}
 </body>
-
+		
 		<script type='text/javascript' src='/socket.io/socket.io.js'></script>
-		<script type="text/javascript" src ="client.js"></script>
+<<<<<<< HEAD
+=======
+		<script>
+  		var socket = io();
+  		socket.emit('hi')
+  		console.log(window)
+  		console.log(window.player)
+
+
+		</script>
+
+>>>>>>> 4d386e76f43d3c6c9483ada68e67e147692ad391
+		<script type="text/javascript" src ="/socket.io/client.js"></script>
 
 </html>

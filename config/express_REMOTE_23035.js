@@ -174,20 +174,11 @@ module.exports = function(db) {
 
 	io.sockets.on('connection', function(socket){
   		console.log('a user connected');
-<<<<<<< HEAD
-  		console.log('ssuusdfsdfsdf')
-		io.sockets.on('youtube', function(data){
-			console.log(data)
-		})
-=======
 
   		socket.on('hi', function(){
   			console.log('emit received')
   		});
->>>>>>> 4d386e76f43d3c6c9483ada68e67e147692ad391
 	});
-
-
 
 	// Return Express server instance
 

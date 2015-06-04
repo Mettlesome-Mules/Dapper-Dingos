@@ -4,7 +4,10 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	function($scope, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
+<<<<<<< HEAD
 	}
+=======
+>>>>>>> 4d386e76f43d3c6c9483ada68e67e147692ad391
 ])
 
 .directive('youtube', 
@@ -57,6 +60,12 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	  }
 	});		
 
+
+
+				var socket = io.connect();
+				
+
+
 	    function onPlayerStateChange(event){
 	    	
 	    	var socket = io.connect();
@@ -78,7 +87,10 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 				socket.on('Initiate Player', videoPlay())
 					
 			}
+<<<<<<< HEAD
 			
+=======
+>>>>>>> 4d386e76f43d3c6c9483ada68e67e147692ad391
 	//If Player is paused
 			if (event.data === 2) {
 				console.log('paused')
