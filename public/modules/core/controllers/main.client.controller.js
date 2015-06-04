@@ -4,15 +4,6 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	function($scope, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
-
-		$scope.toggleCollapsibleMenu = function() {
-			$scope.isCollapsed = !$scope.isCollapsed;
-		};
-
-		// Collapsing the menu after navigation
-		$scope.$on('$stateChangeSuccess', function() {
-			$scope.isCollapsed = false;
-		});
 	}
 ])
 
@@ -31,6 +22,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	    template: '<div></div>',
 
 	    link: function(scope, element, attrs) {
+	      window.j = attrs;
 	      var tag = document.createElement('script');
 	      tag.src = "https://www.youtube.com/iframe_api";
 	      var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -41,7 +33,6 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 
 	      $window.onYouTubeIframeAPIReady = function() {
 	        player = new YT.Player(element.children()[0], {
-
 
 		        playerVars: {
 	            autoplay: 0,
@@ -64,14 +55,29 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	      };
 	    },  
 	  }
-	});
+	});		
 
 	    function onPlayerStateChange(event){
+	    	
+	    	var socket = io.connect();
 
 	// If player is Playing
 			if (event.data === 1) {
+				console.log('Youtube object: ' + JSON.stringify(window.j))
 				console.log('playing')
-				}
+				socket.emit('initiate player', videoPlay());
+
+
+				// socket.broadcast('Initiate Player')
+
+				// function videoPlay() {
+				// 	player.videoPlay
+				// 	console.log('working')
+				// }
+
+				socket.on('Initiate Player', videoPlay())
+					
+			}
 			
 	//If Player is paused
 			if (event.data === 2) {

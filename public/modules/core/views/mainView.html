@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <section data-ng-controller="mainController">
 
 <div class="container" data-ng-controller="mainController">
@@ -7,8 +7,13 @@
 	<nav class="collapse navbar-collapse" role="navigation">
 
 		<div class='youtube'>
+
 			<youtube  width="640" height="390" videoid="M7lc1UVf-VE"></youtube>
+
 				<div class="searchYT">
+					<br>
+				<button size='50' ng-click='runSocket()'>Submit</button>
+				<br>
 					This is where the Youtube search will go
 				</div>
 		</nav>
@@ -43,20 +48,18 @@
 <!-- 		// <script type='text/javascript' src='/socket.io/socket.io.js'></script>
 		// <script type="text/javascript" src ="client.js"></script> -->
 
+<script type='text/javascript'>
+console.log('weienr')
+	var socket = io();
+	function socketCall(){
+		console.log('sending object')
+	 socket.broadcast.emit('youtube', 'Welcome to Rainbow');
+	};
 
+	socketCall();
+</script>
 
 </section>
-=======
-<div class="container" data-ng-controller="mainController">
-	<div class="navbar-header">
-		<a href="/#!/main" class="navbar-brand">THIS IS THE MAIN PAGE</a>
-	</div>
-
-	<nav class="collapse navbar-collapse" role="navigation">
-
-	</nav>
-</div>
-
 
 
 

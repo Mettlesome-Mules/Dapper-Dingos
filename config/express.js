@@ -175,7 +175,12 @@ module.exports = function(db) {
 	io.sockets.on('connection', function(socket){
   		console.log('a user connected');
   		console.log('ssuusdfsdfsdf')
+		io.sockets.on('youtube', function(data){
+			console.log(data)
+		})
 	});
+
+
 
 	// Return Express server instance
 
