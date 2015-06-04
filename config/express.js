@@ -25,6 +25,8 @@ var fs = require('fs'),
 	consolidate = require('consolidate'),
 	path = require('path');
 
+
+
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
@@ -160,11 +162,24 @@ module.exports = function(db) {
 		return httpsServer;
 	}
 // #DD Attach Socket.io
+
 	var server = http.createServer(app);
 	var io = socketio.listen(server);
+
+	console.log(io)
+
 	app.set('socketio', io);
 	app.set('server', server);
 
+
+	io.sockets.on('connection', function(socket){
+  		console.log('a user connected');
+  		console.log('ssuusdfsdfsdf')
+	});
+
 	// Return Express server instance
-	return app;
+
+	return app
+
 };
+
