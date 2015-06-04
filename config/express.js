@@ -174,7 +174,10 @@ module.exports = function(db) {
 
 	io.sockets.on('connection', function(socket){
   		console.log('a user connected');
-  		console.log('ssuusdfsdfsdf')
+
+  		socket.on('hi', function(){
+  			console.log('emit received')
+  		});
 	});
 
 	// Return Express server instance
