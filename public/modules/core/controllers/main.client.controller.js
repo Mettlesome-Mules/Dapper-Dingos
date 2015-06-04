@@ -39,7 +39,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	        player = new YT.Player(element.children()[0], {
 
 		        playerVars: {
-	            autoplay: play,
+	            autoplay: 0,
 	            html5: 1,
 	            theme: "light",
 	            modesbranding: 0,
