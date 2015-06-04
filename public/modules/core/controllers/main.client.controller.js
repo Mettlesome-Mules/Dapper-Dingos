@@ -68,22 +68,21 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 
 	// If player is Playing
 			if (event.data === 1) {
-				console.log('Youtube object: ' + window.j)
+				console.log('Youtube object: ' + JSON.stringify(window.j))
 				console.log('playing')
-				console.log(io)
-				socket.emit('hi', console.log('emitting hi'));
+				socket.emit('initiate player', videoPlay());
 
 
-				socket.broadcast('Initiate Player', potential variable)
+				// socket.broadcast('Initiate Player')
 
-				function VideoPlay() {
-					player.videoPlay
-				}
+				// function videoPlay() {
+				// 	player.videoPlay
+				// 	console.log('working')
+				// }
 
 				socket.on('Initiate Player', videoPlay())
 					
 			}
-			
 	//If Player is paused
 			if (event.data === 2) {
 				console.log('paused')
