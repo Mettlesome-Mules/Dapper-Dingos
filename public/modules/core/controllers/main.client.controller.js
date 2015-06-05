@@ -4,10 +4,53 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	function($scope, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
-])
+	}
 
+])
+//create youtube helper functions for sockets and functionality #DD
+.factory('youtubeFactory', function(){
+	return {
+
+			// socketPlayVideo: 
+
+	    onPlayerStateChange: function(event){
+	    	
+	    	var socket = io.connect();
+
+	    	socket.on('startVid', function(){
+    			console.log('startingVid')
+ 				});
+	// If player is Playing #DD
+			if (event.data === 1) {
+				console.log('Youtube object: ' + JSON.stringify(window.j))
+				console.log('playing')
+				console.log(event)
+				socket.emit('initiate', console.log('sending that its time to play!'));
+
+				// socket.broadcast('Initiate Player')
+
+				// function videoPlay() {
+				// 	player.videoPlay
+				// 	console.log('working')
+				// }
+
+					
+			}
+
+	//If Player is paused #DD
+			if (event.data === 2) {
+				console.log('paused')
+				}
+			},
+
+		   onPlayerReady: function(event){
+		   	console.log('player ready')
+		}
+	}
+})
+//create youtube directive/tag for HTML #DD
 .directive('youtube', 
-	function($window) {
+	function($window, youtubeFactory) {
 	  return {
 	    restrict: "E",
 
@@ -42,54 +85,17 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	            iv_load_policy: 3,
 	            showinfo: 1,
           		controls: 1,
+          		start: 0
          	  },
           	  height: scope.height,
               width: scope.width,
               videoId: 'AXwGVXD7qEQ', //set to searchVideos
               events: {
-              	'onReady': onPlayerReady,
-              	'onStateChange': onPlayerStateChange
+              	'onReady': youtubeFactory.onPlayerReady,
+              	'onStateChange': youtubeFactory.onPlayerStateChange
               }
        		});
 	      };
 	    },  
 	  }
 	});
-
-
-
-				var socket = io.connect();
-				
-
-
-	    function onPlayerStateChange(event){
-	    	
-	    	var socket = io.connect();
-
-	// If player is Playing
-			if (event.data === 1) {
-				console.log('Youtube object: ' + JSON.stringify(window.j))
-				console.log('playing')
-				socket.emit('initiate player', videoPlay());
-
-
-				// socket.broadcast('Initiate Player')
-
-				// function videoPlay() {
-				// 	player.videoPlay
-				// 	console.log('working')
-				// }
-
-				socket.on('Initiate Player', videoPlay())
-					
-			}
-	//If Player is paused
-			if (event.data === 2) {
-				console.log('paused')
-				}
-			}
-	//
-
-		   function onPlayerReady(event){
-		   	console.log('player ready')
-		};

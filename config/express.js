@@ -171,14 +171,19 @@ module.exports = function(db) {
 	app.set('socketio', io);
 	app.set('server', server);
 
-
+	//#DD IO function to receiev events and relay them to users
 	io.sockets.on('connection', function(socket){
   		console.log('a user connected');
-
-  		socket.on('hi', function(){
-  			console.log('emit received')
+		io.sockets.on('youtube', function(data){
+			console.log('here')
+		})
+  		socket.on('initiate', function(data){
+  			console.log('relaying')
+   			 io.emit('startVid');
   		});
-	});
+  	});
+
+
 
 	// Return Express server instance
 
