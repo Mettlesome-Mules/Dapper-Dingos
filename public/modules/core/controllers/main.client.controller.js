@@ -10,17 +10,22 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 //create youtube helper functions for sockets and functionality #DD
 .factory('youtubeFactory', function(){
 	return {
+
+			// socketPlayVideo: 
+
 	    onPlayerStateChange: function(event){
 	    	
 	    	var socket = io.connect();
 
+	    	socket.on('startVid', function(){
+    			console.log('startingVid')
+ 				});
 	// If player is Playing #DD
 			if (event.data === 1) {
 				console.log('Youtube object: ' + JSON.stringify(window.j))
 				console.log('playing')
 				console.log(event)
-				socket.emit('initiate player', videoPlay());
-
+				socket.emit('initiate', console.log('sending that its time to play!'));
 
 				// socket.broadcast('Initiate Player')
 
@@ -29,7 +34,6 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 				// 	console.log('working')
 				// }
 
-				socket.on('Initiate Player', videoPlay())
 					
 			}
 
@@ -38,7 +42,6 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 				console.log('paused')
 				}
 			},
-	//
 
 		   onPlayerReady: function(event){
 		   	console.log('player ready')
@@ -82,6 +85,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	            iv_load_policy: 3,
 	            showinfo: 1,
           		controls: 1,
+          		start: 0
          	  },
           	  height: scope.height,
               width: scope.width,
@@ -94,4 +98,4 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	      };
 	    },  
 	  }
-	});		
+	});

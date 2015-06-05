@@ -66,18 +66,6 @@
 </body>
 		
 		<script type='text/javascript' src='/socket.io/socket.io.js'></script>
-<<<<<<< HEAD
-=======
-		<script>
-  		var socket = io();
-  		socket.emit('hi')
-  		console.log(window)
-  		console.log(window.player)
-
-
-		</script>
-
->>>>>>> 4d386e76f43d3c6c9483ada68e67e147692ad391
 		<script type="text/javascript" src ="/socket.io/client.js"></script>
 
 </html>

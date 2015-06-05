@@ -171,17 +171,17 @@ module.exports = function(db) {
 	app.set('socketio', io);
 	app.set('server', server);
 
-
+	//#DD IO function to receiev events and relay them to users
 	io.sockets.on('connection', function(socket){
   		console.log('a user connected');
-  		console.log('ssuusdfsdfsdf')
 		io.sockets.on('youtube', function(data){
-			console.log(data)
+			console.log('here')
 		})
-  		socket.on('hi', function(){
-  			console.log('emit received')
+  		socket.on('initiate', function(data){
+  			console.log('relaying')
+   			 io.emit('startVid');
   		});
-	});
+  	});
 
 
 

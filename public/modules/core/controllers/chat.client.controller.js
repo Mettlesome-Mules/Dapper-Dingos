@@ -22,7 +22,7 @@ angular.module('core').directive('ngEnter', function () {
 				callback(data, true);
 			});
 		}
-	}
+	} 
 }])
 .controller('chatController', ['$scope', 'MessageCreator', function ($scope, MessageCreator) {
 	$scope.userName = '';
