@@ -56,7 +56,7 @@ angular.module('core')
 	$scope.sendMessage = function () {
 		console.log("Send message event triggered")
 		var chatMessage = {
-			'username' : $scope.userName,
+			'username' : $scope.user.displayName,
 			'message' : $scope.message
 		};
 
