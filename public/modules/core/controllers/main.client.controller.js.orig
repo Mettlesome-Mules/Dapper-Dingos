@@ -49,7 +49,14 @@ angular.module('core')
 	    	
 	    	var socket = io.connect();
 
+<<<<<<< HEAD
+	    	socket.on('startVid', function(){
+    			console.log('startingVid')
+    			//need to build function to start the video in the player
+ 				});
+=======
 	    	
+>>>>>>> video player plays on multiple clients
 	// If player is Playing #DD
 			if (event.data === 1) {
 				console.log('Youtube object: ' + JSON.stringify(window.j))
@@ -70,7 +77,6 @@ angular.module('core')
 	//If Player is paused #DD
 			if (event.data === 2) {
 				console.log('paused')
-				socket.emit('paused', console.log('sending that video has been paused!'));
 				}
 			},
 
@@ -111,11 +117,7 @@ angular.module('core')
     			console.log('playing video')
  				});
 
-	      socket.on('pauseVid', function(){
-    			console.log('pausingVid')
-    			player.pauseVideo();
-    			console.log('stopping video')
- 				});
+
 
 	      $window.onYouTubeIframeAPIReady = function() {
 	        player = new YT.Player(element.children()[0], {
