@@ -177,23 +177,27 @@ module.exports = function(db) {
 		io.sockets.on('youtube', function(data){
 			console.log('here')
 		})
+
+		//socket function for starting video #DD
   		socket.on('initiate', function(data){
   			console.log('relaying player start')
    			 io.emit('startVid');
   		});
+
+  		//socket function for pausing #DD
   		socket.on('paused', function(data){
   			console.log('relaying pause')
    			 io.emit('pauseVid');
    		});
-   		socket.on('changingUrl', function(data,error){
-   			console.log(data)
-   			io.emit('changeVid', data);
+   		//socket function for changing video #DD
+   		socket.on('changingUrl', function(url,error){
+   			console.log('relaying new Url')
+   			io.emit('changeVid', url);
    		})
    	})
 
 
 	// Return Express server instance
-
 	return app
 
 };
