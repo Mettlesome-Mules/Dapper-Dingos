@@ -4,8 +4,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	function($scope, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
-	}
-
+}
 ])
 //create youtube helper functions for sockets and functionality #DD
 .factory('youtubeFactory', function(){

@@ -15,7 +15,7 @@ module.exports = function(app) {
 	app.route('/auth/signout').get(users.signout);
 
 	//#DD setting up the chat messenger routing
-	app.route('/message').get(users.messages)
+	// app.route('/message').get(users.messages)
 
 	// #DD Setting the google oauth routes
 	app.route('/auth/google').get(passport.authenticate('google', {
