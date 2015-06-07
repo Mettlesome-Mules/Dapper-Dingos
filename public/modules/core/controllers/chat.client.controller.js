@@ -14,7 +14,7 @@ angular.module('core')
     };
 })
 // #DD develop method to post methods to server and DB
-.factory('MessageCreator', ['$http', function ($http){
+.factory('MessageFactory', ['$http', function ($http){
 	return {
 		postMessage: function (message, callback) {
 			console.log('Attempting Post')
@@ -30,8 +30,8 @@ angular.module('core')
 }])
 
 //#DD controller interface for user chat window, need to change userName to current authed user
-.controller('chatController', ['$scope', 'MessageCreator', function ($scope, MessageCreator) {
-	$scope.userName = '';
+.controller('chatController', ['$scope','Authentication', 'MessageFactory', function ($scope, Authentication, MessageFactory) {
+	$scope.userName = Authentication.user;
 	$scope.message = '';
 	$scope.filterText = '';
 	$scope.messages = [];
@@ -55,19 +55,17 @@ angular.module('core')
 	//#DD using the local authentication as a condition, send a message to the server
 	$scope.sendMessage = function () {
 		console.log("Send message event triggered")
-		if (authentication.user) {
-			var chatMessage = {
-				'username' : authentication.user.displayName,
-				'message' : $scope.message
-			};
+		var chatMessage = {
+			'username' : $scope.userName,
+			'message' : $scope.message
+		};
 
-			MessageCreator.postMessage(chatMessage, function (result, error) {
-				if (error) {
-					window.alert('Error saving to DB');
-					return;
-				}
-				$scope.message = '';
-			});
-		}
+		MessageFactory.postMessage(chatMessage, function (result, error) {
+			if (error) {
+				window.alert('Error saving to DB');
+				return;
+			}
+			$scope.message = '';
+		});
 	};
 }]);
