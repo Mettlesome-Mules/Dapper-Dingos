@@ -70,6 +70,7 @@ angular.module('core')
 	//If Player is paused #DD
 			if (event.data === 2) {
 				console.log('paused')
+				socket.emit('paused', console.log('sending that video has been paused!'));
 				}
 			},
 
@@ -108,6 +109,12 @@ angular.module('core')
     			console.log('startingVid')
     			player.playVideo();
     			console.log('playing video')
+ 				});
+
+	      socket.on('pauseVid', function(){
+    			console.log('pausingVid')
+    			player.pauseVideo();
+    			console.log('stopping video')
  				});
 
 	      $window.onYouTubeIframeAPIReady = function() {
