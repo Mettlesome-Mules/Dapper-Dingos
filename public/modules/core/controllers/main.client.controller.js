@@ -97,4 +97,34 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	      };
 	    },  
 	  }
-	});
+	});		
+
+
+
+				var socket = io.connect();
+				
+
+
+	    function onPlayerStateChange(event){
+	    	
+	    	var socket = io.connect();
+
+	// If player is Playing
+			if (event.data === 1) {
+				console.log('Youtube object: ' + JSON.stringify(window.j))
+				console.log('playing')
+				socket.emit('initiate player', videoPlay());
+
+
+				// socket.broadcast('Initiate Player')
+
+				// function videoPlay() {
+				// 	player.videoPlay
+				// 	console.log('working')
+				// }
+
+				socket.on('Initiate Player', videoPlay())
+					
+			}
+
+		}
