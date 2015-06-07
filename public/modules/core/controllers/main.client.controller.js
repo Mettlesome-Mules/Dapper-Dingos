@@ -17,13 +17,10 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	    	
 	    	var socket = io.connect();
 
-	    	socket.on('startVid', function(){
-    			console.log('startingVid')
- 				});
+	    	
 	// If player is Playing #DD
 			if (event.data === 1) {
 				console.log('Youtube object: ' + JSON.stringify(window.j))
-				console.log('playing')
 				console.log(event)
 				socket.emit('initiate', console.log('sending that its time to play!'));
 
@@ -43,7 +40,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 				}
 			},
 
-		   onPlayerReady: function(event){
+			onPlayerReady: function(event){
 		   	console.log('player ready')
 		}
 	}
@@ -72,6 +69,13 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 
 	      var player;
 	      //var searchVideos;
+	      var socket = io.connect();
+
+	      socket.on('startVid', function(){
+    			console.log('startingVid')
+    			player.playVideo();
+    			console.log('playing video')
+ 				});
 
 	      $window.onYouTubeIframeAPIReady = function() {
 	        player = new YT.Player(element.children()[0], {
