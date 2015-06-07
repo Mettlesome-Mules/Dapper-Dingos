@@ -185,8 +185,11 @@ module.exports = function(db) {
   			console.log('relaying pause')
    			 io.emit('pauseVid');
    		});
-  	});
-
+   		socket.on('changingUrl', function(data,error){
+   			console.log(data)
+   			io.emit('changeVid', data);
+   		})
+   	})
 
 
 	// Return Express server instance

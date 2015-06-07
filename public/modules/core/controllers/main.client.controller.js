@@ -30,9 +30,8 @@ angular.module('core')
 				  video_id = video_id.substring(0, video_id.length);
 				}
 
-
-				console.log('Video_ID is ' + video_id)
-			window.searchVideos = video_id;
+				var socket = io.connect();
+				socket.emit('changingUrl', video_id)
 		}
 
 	}])
@@ -116,6 +115,13 @@ angular.module('core')
     			player.pauseVideo();
     			console.log('stopping video')
  				});
+
+			socket.on('changeVid', function(urlKey){
+				console.log('changing video Url')
+				console.log(urlKey)
+				player.loadVideoByUrl({ mediaContentUrl: 'http://www.youtube.com/v/' + urlKey + '?version=3'})
+				console.log('loading new Url')
+			})
 
 	      $window.onYouTubeIframeAPIReady = function() {
 	        player = new YT.Player(element.children()[0], {
