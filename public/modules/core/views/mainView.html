@@ -8,20 +8,22 @@
 
 		<div class='youtube'>
 
-			<youtube  width="640" height="390" videoid="M7lc1UVf-VE"></youtube>
+			<youtube width="640" height="390" src="M7lc1UVf-VE"></youtube>
 
 				<div class="searchYT">
 					<br>
-				<button size='50' ng-click='runSocket()'>Submit</button>
-				<br>
-					This is where the Youtube search will go
+						<input type="text" ng-enter='ytSearcher()' ng-model="ytQuery" placeholder='Paste in a video link here!' size='50'></input>
+						<button size='10' ng-click='ytSearcher()'>Submit</button>
 				</div>
-		</nav>
-	</div>
+
+
+		</div>
+	</nav>
 
 	<div class="chatUsersContainer">
 		<div class="chatBarUsers">
-			This is where a list of users will appear (pending: webcam)
+			
+
 		</div>
 	</div>
 
@@ -34,6 +36,7 @@
 				<br>
 				<button size='50' ng-click='sendMessage()'>Submit</button>
 				<br>
+
 				<!-- <p>Filter Messages:
 				<input type="text" ng-model='filterText'>
 				<ul>

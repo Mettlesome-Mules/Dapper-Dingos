@@ -87,14 +87,12 @@ body{
 }
 
 .searchYT{
-	margin: 0 auto;
+/*	margin: 0 auto;
 	display: table;
 	height: 50px;
 	background-color: gray;
-	/*position: absolute;*/
-  /*bottom: 200px;*/
   clear: both;
-  border: black 1px solid;
+  border: black 1px solid;*/
 }
 
 

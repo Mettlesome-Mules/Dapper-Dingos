@@ -1,12 +1,44 @@
 'use strict';
 
-angular.module('core').controller('mainController', ['$scope', 'Menus',
-	function($scope, Menus) {
+angular.module('core')
+
+
+
+// ['$scope', 'MessageCreator', function ($scope, MessageCreator) 
+
+
+
+
+
+
+.controller('mainController', ['$scope', 'Menus', function($scope, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
-	}
+		window.searchVideos = 'AXwGVXD7qEQ';
 
-])
+
+		$scope.ytQuery = '';
+
+		$scope.ytSearcher = function(){
+
+			var video_id = $scope.ytQuery.split('v=')[1];
+			console.log(video_id, $scope.ytQuery)
+				if(video_id.indexOf('&') !== -1) {
+				var ampersandPosition = video_id.indexOf('&');
+				  video_id = video_id.substring(0, ampersandPosition);
+				} else {
+				  video_id = video_id.substring(0, video_id.length);
+				}
+
+
+				console.log('Video_ID is ' + video_id)
+			window.searchVideos = video_id;
+		}
+
+	}])
+
+
+
 //create youtube helper functions for sockets and functionality #DD
 .factory('youtubeFactory', function(){
 	return {
@@ -19,12 +51,14 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 
 	    	socket.on('startVid', function(){
     			console.log('startingVid')
+    			//need to build function to start the video in the player
  				});
 	// If player is Playing #DD
 			if (event.data === 1) {
 				console.log('Youtube object: ' + JSON.stringify(window.j))
 				console.log('playing')
 				console.log(event)
+				console.log(event.target.B.videoUrl)
 				socket.emit('initiate', console.log('sending that its time to play!'));
 
 				// socket.broadcast('Initiate Player')
@@ -73,6 +107,8 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	      var player;
 	      //var searchVideos;
 
+
+
 	      $window.onYouTubeIframeAPIReady = function() {
 	        player = new YT.Player(element.children()[0], {
 
@@ -89,7 +125,8 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
          	  },
           	  height: scope.height,
               width: scope.width,
-              videoId: 'AXwGVXD7qEQ', //set to searchVideos
+              // videoId: 'AXwGVXD7qEQ', //set to searchVideos
+              videoId: window.searchVideos, //set to searchVideos
               events: {
               	'onReady': youtubeFactory.onPlayerReady,
               	'onStateChange': youtubeFactory.onPlayerStateChange
@@ -99,3 +136,5 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	    },  
 	  }
 	});
+
+
