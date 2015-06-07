@@ -4,8 +4,7 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	function($scope, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
-	}
-
+}
 ])
 //create youtube helper functions for sockets and functionality #DD
 .factory('youtubeFactory', function(){
@@ -98,4 +97,28 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	      };
 	    },  
 	  }
-	});
+	});		
+
+	    function onPlayerStateChange(event){
+	    	
+	    	var socket = io.connect();
+
+	// If player is Playing
+			if (event.data === 1) {
+				console.log('Youtube object: ' + JSON.stringify(window.j))
+				console.log('playing')
+				socket.emit('initiate player', videoPlay());
+
+
+				// socket.broadcast('Initiate Player')
+
+				// function videoPlay() {
+				// 	player.videoPlay
+				// 	console.log('working')
+				// }
+
+				socket.on('Initiate Player', videoPlay())
+					
+			}
+
+		}
