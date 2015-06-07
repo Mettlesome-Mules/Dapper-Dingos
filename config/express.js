@@ -178,9 +178,13 @@ module.exports = function(db) {
 			console.log('here')
 		})
   		socket.on('initiate', function(data){
-  			console.log('relaying')
+  			console.log('relaying player start')
    			 io.emit('startVid');
   		});
+  		socket.on('paused', function(data){
+  			console.log('relaying pause')
+   			 io.emit('pauseVid');
+   		});
   	});
 
 
