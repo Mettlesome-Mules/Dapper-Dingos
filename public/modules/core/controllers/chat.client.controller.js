@@ -1,4 +1,7 @@
-angular.module('core').directive('ngEnter', function () {
+// #DD calls the core app module
+angular.module('core')
+// #DD Establish functionality for pressing the enter key, 
+.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keypress", function (event) {
             if(event.which === 13) {
@@ -10,6 +13,7 @@ angular.module('core').directive('ngEnter', function () {
         });
     };
 })
+// #DD develop method to post methods to server and DB
 .factory('MessageCreator', ['$http', function ($http){
 	return {
 		postMessage: function (message, callback) {
@@ -24,6 +28,8 @@ angular.module('core').directive('ngEnter', function () {
 		}
 	} 
 }])
+
+//#DD controller interface for user chat window, need to change userName to current authed user
 .controller('chatController', ['$scope', 'MessageCreator', function ($scope, MessageCreator) {
 	$scope.userName = '';
 	$scope.message = '';
@@ -46,17 +52,12 @@ angular.module('core').directive('ngEnter', function () {
 		$scope.$apply();
 	});
 
-	//send a message to the server
+	//#DD using the local authentication as a condition, send a message to the server
 	$scope.sendMessage = function () {
 		console.log("Send message event triggered")
-		if ($scope.userName == '') {
-			window.alert('Choose a username');
-			return;
-		}
-
-		if (!$scope.message == '') {
+		if (authentication.user) {
 			var chatMessage = {
-				'username' : $scope.userName,
+				'username' : authentication.user.displayName,
 				'message' : $scope.message
 			};
 
