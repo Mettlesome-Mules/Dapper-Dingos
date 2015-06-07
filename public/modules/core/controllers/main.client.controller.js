@@ -49,7 +49,8 @@ angular.module('core')
 
 	    	
 	// If player is Playing #DD
-			if (event.data === 1) {
+			if (event.data === 1 && !window.hold) {
+				window.hold = true;
 				console.log('Youtube object: ' + JSON.stringify(window.j))
 				console.log(event)
 				console.log(event.target.B.videoUrl)
@@ -57,7 +58,8 @@ angular.module('core')
 			}
 
 	//If Player is paused #DD
-			if (event.data === 2) {
+			if (event.data === 2 && !window.hold) {
+				window.hold = true;
 				console.log('paused')
 				socket.emit('paused', console.log('sending that video has been paused!'));
 				}
@@ -98,6 +100,7 @@ angular.module('core')
 	      socket.on('startVid', function(){
     			console.log('startingVid')
     			player.playVideo();
+    			window.hold = false;
     			console.log('playing video')
  				});
 
@@ -105,6 +108,7 @@ angular.module('core')
 	      socket.on('pauseVid', function(){
     			console.log('pausingVid')
     			player.pauseVideo();
+    			window.hold = false;
     			console.log('stopping video')
  				});
 
