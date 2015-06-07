@@ -99,12 +99,6 @@ angular.module('core').controller('mainController', ['$scope', 'Menus',
 	  }
 	});		
 
-
-
-				var socket = io.connect();
-				
-
-
 	    function onPlayerStateChange(event){
 	    	
 	    	var socket = io.connect();
