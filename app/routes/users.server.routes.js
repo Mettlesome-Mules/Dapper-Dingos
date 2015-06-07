@@ -14,7 +14,10 @@ module.exports = function(app) {
 	app.route('/auth/signin').post(users.signin);
 	app.route('/auth/signout').get(users.signout);
 
-	// Setting the google oauth routes
+	//#DD setting up the chat messenger routing
+	// app.route('/message').get(users.messages)
+
+	// #DD Setting the google oauth routes
 	app.route('/auth/google').get(passport.authenticate('google', {
 		scope: [
 			'https://www.googleapis.com/auth/userinfo.profile',
@@ -27,6 +30,7 @@ module.exports = function(app) {
 			'https://www.googleapis.com/auth/youtubepartner-channel-audit'
 		]
 	}));
+	//#DD setting up the users oath authentication API
 	app.route('/auth/google/callback').get(users.oauthCallback('google'));
 
 	// Finish by binding the user middleware

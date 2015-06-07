@@ -1,4 +1,7 @@
-angular.module('core').directive('ngEnter', function () {
+// #DD calls the core app module
+angular.module('core')
+// #DD Establish functionality for pressing the enter key, 
+.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keypress", function (event) {
             if(event.which === 13) {
@@ -10,7 +13,8 @@ angular.module('core').directive('ngEnter', function () {
         });
     };
 })
-.factory('MessageCreator', ['$http', function ($http){
+// #DD develop method to post methods to server and DB
+.factory('MessageFactory', ['$http', function ($http){
 	return {
 		postMessage: function (message, callback) {
 			console.log('Attempting Post')
@@ -24,8 +28,10 @@ angular.module('core').directive('ngEnter', function () {
 		}
 	} 
 }])
-.controller('chatController', ['$scope', 'MessageCreator', function ($scope, MessageCreator) {
-	$scope.userName = '';
+
+//#DD controller interface for user chat window, need to change userName to current authed user
+.controller('chatController', ['$scope','Authentication', 'MessageFactory', function ($scope, Authentication, MessageFactory) {
+	$scope.userName = Authentication.user;
 	$scope.message = '';
 	$scope.filterText = '';
 	$scope.messages = [];
@@ -46,27 +52,20 @@ angular.module('core').directive('ngEnter', function () {
 		$scope.$apply();
 	});
 
-	//send a message to the server
+	//#DD using the local authentication as a condition, send a message to the server
 	$scope.sendMessage = function () {
 		console.log("Send message event triggered")
-		if ($scope.userName == '') {
-			window.alert('Choose a username');
-			return;
-		}
+		var chatMessage = {
+			'username' : $scope.userName.displayName,
+			'message' : $scope.message
+		};
 
-		if (!$scope.message == '') {
-			var chatMessage = {
-				'username' : $scope.userName,
-				'message' : $scope.message
-			};
-
-			MessageCreator.postMessage(chatMessage, function (result, error) {
-				if (error) {
-					window.alert('Error saving to DB');
-					return;
-				}
-				$scope.message = '';
-			});
-		}
+		MessageFactory.postMessage(chatMessage, function (result, error) {
+			if (error) {
+				window.alert('Error saving to DB');
+				return;
+			}
+			$scope.message = '';
+		});
 	};
 }]);
