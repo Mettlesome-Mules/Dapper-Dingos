@@ -183,6 +183,7 @@ module.exports = function(db) {
 	io.sockets.on('connection', function(socket){
   		console.log('a user connected');
 
+
 		//socket function for starting video #DD
   		socket.on('initiate', function(data){
   			console.log('relaying player start')
@@ -200,13 +201,13 @@ module.exports = function(db) {
    			io.emit('changeVid', url);
    		})
 
-   			socket.on(['getUsers'],function(){
+   			socket.on('getUsers',function(){
 		  Message.find(function (err, allMessages) {
 		  	if (err) {
 		  		return console.error(err)
 		  	};
 		  	console.log('finding all messages with GetUsers')
-		  	socket.emit('pastMessages', allMessages);
+		  	io.emit('pastMessages', allMessages);
 		  })
 		})
 
@@ -223,7 +224,7 @@ module.exports = function(db) {
 		  		return console.error(err)
 		  	};
 		  	console.log('finding all messages with newMessage')
-		  	socket.emit('pastMessages', allMessages);
+		  	io.emit('pastMessages', allMessages);
 		  })
 		  })
 		})
