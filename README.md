@@ -1,8 +1,8 @@
 Stream Team: A Dapper Dingos Joint
 
-[![alt tag](http://i62.tinypic.com/2vxmzdc.jpg)]
+![alt tag](http://i62.tinypic.com/2vxmzdc.jpg)
 
-An MEAN stack application utilizing socket.io to allow Youtube videos to be watched as a team.  Utilizing [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/), this users can log into https://dapperdingos.herokuapp.com and share videos with other authorized users.  
+An MEAN stack application that employs socket.io to allow Youtube videos to be watched as a team in real time.  Utilizing [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/), log into https://dapperdingos.herokuapp.com and share videos with other authorized users.  
 
 ## Credits
 Inspired by the intense need to immediately show all your friends the hilarious videos you locate online. 
