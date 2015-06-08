@@ -1,6 +1,6 @@
 // #DD calls the core app module
 angular.module('core')
-// #DD Establish functionality for pressing the enter key, 
+// #DD Establish functionality for pressing the enter key
 .directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keypress", function (event) {
@@ -37,10 +37,9 @@ angular.module('core')
 	$scope.messages = [];
 
 	var socket = io.connect();
-
 	// #DD load previous messages from chat
 	socket.on('pastMessages', function (data) {
-		console.log(data, 'past')
+		// console.log(data, 'past')
 		$scope.messages = data.reverse();
 		// data.forEach(function (message) {
 		// 	$scope.messages.unshift(message);
@@ -52,10 +51,10 @@ angular.module('core')
 
 	//#DD using the local authentication as a condition, send a message to the server
 	$scope.sendMessage = function () {
-		console.log("Send message event triggered")
+		console.log("Send message event triggered", $scope.userName)
 
 		var chatMessage = {
-			'username' : $scope.userName.displayName,
+			'username' : $scope.userName.username,
 			'message' : $scope.message
 		};
 
@@ -65,5 +64,3 @@ angular.module('core')
 
 		socket.emit('getUsers')
 }]);
-
-
