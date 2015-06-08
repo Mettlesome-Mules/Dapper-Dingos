@@ -171,6 +171,14 @@ module.exports = function(db) {
 	app.set('socketio', io);
 	app.set('server', server);
 
+	// #DD create Schema for messages
+	var chatMessage = new mongoose.Schema({
+		username: String,
+		message: String
+	});
+
+	var Message = mongoose.model('Message', chatMessage)
+
 	//#DD IO function to receiev events and relay them to users
 	io.sockets.on('connection', function(socket){
   		console.log('a user connected');
@@ -209,17 +217,27 @@ module.exports = function(db) {
 		  	socket.emit('pastMessages', allMessages);
 		  })
 		})
-   	})
 
-	// #DD create Schema for messages
-	var chatMessage = new mongoose.Schema({
-		username: String,
-		message: String
-	});
+		socket.on('newMessage',function(message){
+			console.log(message,'before function')
+		  Message.create(message, function (err, message) {
+		  	if (err) {
+		  		return console.error(err)
+		  	};
+		  	console.log('posting to messages', message)
+		  	Message.find(function (err, allMessages) {
+		  	if (err) {
+		  		return console.error(err)
+		  	};
+		  	console.log('finding all messages')
+		  	socket.emit('pastMessages', allMessages);
+		  })
+		  })
+		})
+   	})
 
 
 	// #DD define a model based on that SCHEMA, currently independant of users
-	var Message = mongoose.model('Message', chatMessage)
 
 
 	// #DD write a route for the clientside posts to DB

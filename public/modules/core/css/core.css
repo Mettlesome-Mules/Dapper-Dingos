@@ -44,6 +44,21 @@ body{
 	opacity: 0.8
 }
 
+.btn2{
+	background-color: #dcdcdc;
+	font-size: 65px;
+	opacity: 0.8
+}
+
+.btnCtn{
+	text-align: center;
+	width: 100%;
+	left: 50%;
+	top:50%;
+	padding-top:250px;
+
+}
+
 .youtube{
 	text-align: center;
 	position: absolute;
@@ -89,6 +104,8 @@ body{
 .chatBar{
 	overflow: scroll;
 }
+
+
 
 .input{
 	position: absolute;

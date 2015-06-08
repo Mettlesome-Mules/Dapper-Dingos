@@ -54,22 +54,18 @@ angular.module('core')
 		$scope.$apply();
 	});
 
+
+
 	//#DD using the local authentication as a condition, send a message to the server
 	$scope.sendMessage = function () {
 		console.log("Send message event triggered")
-		socket.emit('sending');
 
 		var chatMessage = {
 			'username' : $scope.userName.displayName,
 			'message' : $scope.message
 		};
 
-		MessageFactory.postMessage(chatMessage, function (result, error) {
-			if (error) {
-				window.alert('Error saving to DB');
-				return;
-			}
-			$scope.message = '';
-		});
-	};
+		socket.emit('newMessage',chatMessage);
+		$scope.message = '';
+		};
 }]);
