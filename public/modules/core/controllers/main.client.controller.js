@@ -2,15 +2,6 @@
 
 angular.module('core')
 
-
-
-
-
-
-
-
-
-
 .controller('mainController', ['$scope', 'Menus', function($scope, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
@@ -36,17 +27,13 @@ angular.module('core')
 
 	}])
 
-
-
 //create youtube helper functions for sockets and functionality #DD
 .factory('youtubeFactory', function(){
 	return {
 
-
 	    onPlayerStateChange: function(event){
 	    	
 	    	var socket = io.connect();
-
 	    	
 	// If player is Playing #DD
 			if (event.data === 1 && !window.hold) {
@@ -75,7 +62,6 @@ angular.module('core')
 	function($window, youtubeFactory) {
 	  return {
 	    restrict: "E",
-
 
 	    scope: {
       		height:   "@",
@@ -152,5 +138,4 @@ angular.module('core')
 	    },  
 	  }
 	});
-
 
