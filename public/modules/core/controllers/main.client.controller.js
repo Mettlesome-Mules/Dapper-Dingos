@@ -28,7 +28,7 @@ angular.module('core')
 				} else {
 				  video_id = video_id.substring(0, video_id.length);
 				}
-
+				
 				var socket = io.connect();
 				// #DD triggers url change via sockets, sends videoID as data
 				socket.emit('changingUrl', video_id)
@@ -53,7 +53,6 @@ angular.module('core')
 				window.hold = true;
 				console.log('Youtube object: ' + JSON.stringify(window.j))
 				console.log(event)
-				console.log(event.target.B.videoUrl)
 				socket.emit('initiate', console.log('sending that its time to play!'));	
 			}
 
@@ -111,6 +110,13 @@ angular.module('core')
     			window.hold = false;
     			console.log('stopping video')
  				});
+
+	      // #DD socket trigger for Changing Videotime
+ 				socket.on('changeTime', function(newTime){
+ 					console.log('changingTime');
+ 					player.seekTo({seconds:newTime, allowSeekAhead:true})
+ 					window.hold = false;
+ 				})
 
 	      // #DD socket trigger for changing URL
 				socket.on('changeVid', function(urlKey){

@@ -35,17 +35,10 @@ angular.module('core')
 	$scope.message = '';
 	$scope.filterText = '';
 	$scope.messages = [];
-	
+
 	var socket = io.connect();
 
-	//recieve new messages from chat
-	socket.on('receiveMessage', function (data) {
-		console.log(data, 'receive')
-		$scope.messages.unshift(data);
-		$scope.$apply();
-	});
-
-	//load previous messages from chat
+	// #DD load previous messages from chat
 	socket.on('pastMessages', function (data) {
 		console.log(data, 'past')
 		$scope.messages = data.reverse();
@@ -72,3 +65,5 @@ angular.module('core')
 
 		socket.emit('getUsers')
 }]);
+
+
