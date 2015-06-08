@@ -200,23 +200,16 @@ module.exports = function(db) {
    			io.emit('changeVid', url);
    		})
 
-   		Message.find(function (err, allMessages) {
-		  	if (err) {
-		  		return console.error(err)
-		  	};
-		  	console.log('finding all messages')
-		  	socket.emit('pastMessages', allMessages);
-		  })
-
-   			socket.on('sending',function(){
+   			socket.on(['getUsers'],function(){
 		  Message.find(function (err, allMessages) {
 		  	if (err) {
 		  		return console.error(err)
 		  	};
-		  	console.log('finding all messages')
+		  	console.log('finding all messages with GetUsers')
 		  	socket.emit('pastMessages', allMessages);
 		  })
 		})
+
 
 		socket.on('newMessage',function(message){
 			console.log(message,'before function')
@@ -229,7 +222,7 @@ module.exports = function(db) {
 		  	if (err) {
 		  		return console.error(err)
 		  	};
-		  	console.log('finding all messages')
+		  	console.log('finding all messages with newMessage')
 		  	socket.emit('pastMessages', allMessages);
 		  })
 		  })
@@ -241,23 +234,15 @@ module.exports = function(db) {
 
 
 	// #DD write a route for the clientside posts to DB
-	app.post('/message', function (req, res) {
-		console.log('positing')
-		var message = new Message ({
-			username: req.body.username,
-	    	message : req.body.message
-	    });
-
-	    message.save(function (err, saved) {
-	    	if (err) {
-	    		res.send(400);
-	    		return console.log('error saving to db');
-	    	}
-	    	console.log(saved)
-	    	res.send(saved);
-	    	io.sockets.emit('receiveMessage', saved);
-	    })
-	});
+	    // message.save(function (err, saved) {
+	    // 	if (err) {
+	    // 		res.send(400);
+	    // 		return console.log('error saving to db');
+	    // 	}
+	    // 	console.log(saved)
+	    // 	res.send(saved);
+	    // 	io.sockets.emit('receiveMessage', saved);
+	    // })
 
 
 

@@ -35,6 +35,7 @@ angular.module('core')
 	$scope.message = '';
 	$scope.filterText = '';
 	$scope.messages = [];
+	
 	var socket = io.connect();
 
 	//recieve new messages from chat
@@ -68,4 +69,6 @@ angular.module('core')
 		socket.emit('newMessage',chatMessage);
 		$scope.message = '';
 		};
+
+		socket.emit('getUsers')
 }]);
