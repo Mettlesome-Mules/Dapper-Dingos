@@ -35,7 +35,7 @@ Once the project moves into development, the press release can be used as a touc
   "We believe STREAM TEAM heralds the next entertainment epoch of the millenium of all time everywhere for the rest of history combined through the end of days of humanity.  We will all reach the final second together, and then pick another video to satiate our endless need for distraction."
 
 ## How to Get Started ##
-  > Once users have logged into https://dapperdingos.herokuapp.com, a real time sharing experience POWERHOUSE is immediately available, enabling an exciting new era of instant gratification.  
+  Once users have logged into https://dapperdingos.herokuapp.com, a real time sharing experience POWERHOUSE is immediately available, enabling an exciting new era of instant gratification.  
 
 ## Customer Quote ##
   "My family life has never been more actualized!  Now I can watch videos while my children stay in their rooms safely in the glow of their screens while we all laugh in distinctly remote locations far away from each other, bringing us closer together than ever before!  Now their frequent visits to the hospital will never be as lonely!"
