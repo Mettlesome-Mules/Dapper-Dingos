@@ -11,25 +11,31 @@ Stream Team: A Dapper Dingos Joint
 
 First off - know that we used a MEAN js yeoman scaffold. This is why there are so many directories/files.
 
-Directories/files with significant changes (probably not all inclusive but it should get you started):
+  Directories/files with significant changes (probably not all inclusive but it should get you started):
 
- - config/express.js - this is where socket.io connections are made with the server instance
+   - config/express.js - this is where socket.io connections are made with the server instance
 
- - config/development.js - this is where the mongolab database url is tied in to the server
+   - config/development.js - this is where the mongolab database url is tied in to the server
 
- - public/modules/controllers/(chat & main) - this is where the chat controller lies
+   - public/modules/controllers/(chat & main) - this is where the chat controller lies
 
- - public/modules/views - has html for page/chat
- 
+   - public/modules/views - has html for page/chat
+
+   - public/modules/users/config/users.client.routes.js - contains routes
+
+
+  Many comments in the code are from the yeoman boilerplate.
+  Comments beginning or ending with #DD ( aka HASHTAG DEE DEE ) have been added by us - they should mark the areas that we have modified the boilerplate or added in new content
+   
   
 
-
+--------------------------------------------------------------------------------------
 
 [![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
 
 ![alt tag](http://i62.tinypic.com/2vxmzdc.jpg)
 
-An MEAN stack application that employs socket.io to allow Youtube videos to be watched as a team in real time.  Utilizing [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/), log into https://dapperdingos.herokuapp.com and share videos with other authorized users.  
+An MEAN stack application that employs socket.io to allow Youtube videos to be watched as a team in real time.  Utilizing [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/), log into https://dapperdingos.herokuapp.com and share videos with other authorized users.
 
 ## Credits
 Inspired by the intense need to immediately show all your friends the hilarious videos you locate online. 
