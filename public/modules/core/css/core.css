@@ -86,13 +86,18 @@ body{
 	float: left;
 }
 
-.searchYT{
-/*	margin: 0 auto;
-	display: table;
-	height: 50px;
-	background-color: gray;
-  clear: both;
-  border: black 1px solid;*/
+.chatBar{
+	overflow: scroll;
 }
 
+.input{
+	position: absolute;
+}
 
+.chat{
+	margin-top: 60px;
+}
+
+.youtube{
+	margin-top: 50px;
+}

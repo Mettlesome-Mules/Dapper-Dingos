@@ -39,12 +39,14 @@ angular.module('core')
 
 	//recieve new messages from chat
 	socket.on('receiveMessage', function (data) {
+		console.log(data, 'receive')
 		$scope.messages.unshift(data);
 		$scope.$apply();
 	});
 
 	//load previous messages from chat
 	socket.on('pastMessages', function (data) {
+		console.log(data, 'past')
 		$scope.messages = data.reverse();
 		// data.forEach(function (message) {
 		// 	$scope.messages.unshift(message);
@@ -55,6 +57,8 @@ angular.module('core')
 	//#DD using the local authentication as a condition, send a message to the server
 	$scope.sendMessage = function () {
 		console.log("Send message event triggered")
+		socket.emit('sending');
+
 		var chatMessage = {
 			'username' : $scope.userName.displayName,
 			'message' : $scope.message

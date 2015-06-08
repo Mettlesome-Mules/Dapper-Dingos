@@ -19,31 +19,35 @@
 
 
 		</div>
-
+<!-- 
 	<div class="chatUsersContainer">
 		<div class="chatBarUsers">
 			
 
 		</div>
-	</div>
+	</div> -->
 
 	<div class="chatContainer">
-		<div class="chatBar">
-			<div ng-controller='chatController'>
+		<div class="chatBar"  ng-controller='chatController'>
+			<div class='input'>
 				<!-- <input type="text" ng-model='userName' placeholder='Enter a username'>
 				<br> -->
 				<input type="text" ng-enter='sendMessage()' ng-model='message' placeholder='Type message here' size='25'></input>
 				<br>
-				<button size='50' ng-click='sendMessage()'>Submit</button>
+				<button size='50' ng-click='sendMessage() '>Submit</button>
 				<br>
 
 				<!-- <p>Filter Messages:
-				<input type="text" ng-model='filterText'>
+				<input type="text" ng-model='filterText'> -->
+				</div>
+				<div class='chat'>
 				<ul>
-					<li ng-repeat='text in messages | filter : filterText'>
+					<div ng-repeat='text in messages'>
 						<p>{{text.username}} - {{text.message}}</p>
-					</li>
-				</ul> -->
+					</div>
+			<!-- 	</p> -->
+				</ul>
+
 			</div>
 		</div>
 	</div>

@@ -24,6 +24,8 @@ var fs = require('fs'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
 	path = require('path');
+	var mongoose = require('mongoose');
+
 
 
 
@@ -166,17 +168,12 @@ module.exports = function(db) {
 	var server = http.createServer(app);
 	var io = socketio.listen(server);
 
-	console.log(io)
-
 	app.set('socketio', io);
 	app.set('server', server);
 
 	//#DD IO function to receiev events and relay them to users
 	io.sockets.on('connection', function(socket){
   		console.log('a user connected');
-		io.sockets.on('youtube', function(data){
-			console.log('here')
-		})
 
 		//socket function for starting video #DD
   		socket.on('initiate', function(data){
@@ -194,7 +191,58 @@ module.exports = function(db) {
    			console.log('relaying new Url')
    			io.emit('changeVid', url);
    		})
+
+   		Message.find(function (err, allMessages) {
+		  	if (err) {
+		  		return console.error(err)
+		  	};
+		  	console.log('finding all messages')
+		  	socket.emit('pastMessages', allMessages);
+		  })
+
+   			socket.on('sending',function(){
+		  Message.find(function (err, allMessages) {
+		  	if (err) {
+		  		return console.error(err)
+		  	};
+		  	console.log('finding all messages')
+		  	socket.emit('pastMessages', allMessages);
+		  })
+		})
    	})
+
+	// #DD create Schema for messages
+	var chatMessage = new mongoose.Schema({
+		username: String,
+		message: String
+	});
+
+
+	// #DD define a model based on that SCHEMA, currently independant of users
+	var Message = mongoose.model('Message', chatMessage)
+
+
+	// #DD write a route for the clientside posts to DB
+	app.post('/message', function (req, res) {
+		console.log('positing')
+		var message = new Message ({
+			username: req.body.username,
+	    	message : req.body.message
+	    });
+
+	    message.save(function (err, saved) {
+	    	if (err) {
+	    		res.send(400);
+	    		return console.log('error saving to db');
+	    	}
+	    	console.log(saved)
+	    	res.send(saved);
+	    	io.sockets.emit('receiveMessage', saved);
+	    })
+	});
+
+
+
 
 
 	// Return Express server instance
