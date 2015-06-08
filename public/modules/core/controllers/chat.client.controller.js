@@ -64,8 +64,3 @@ angular.module('core')
 
 		socket.emit('getUsers')
 }]);
-<<<<<<< HEAD
-
-
-=======
->>>>>>> (refactor) added more comments and views/controllers to the list
