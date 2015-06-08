@@ -1,5 +1,7 @@
 # Welcome to STREAM TEAM #
 
+![alt tag](http://i62.tinypic.com/29lbrlw.png)
+
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
 
@@ -19,7 +21,7 @@ Once the project moves into development, the press release can be used as a touc
 ## A real time Youtube sharing application! ##
 
 ## Summary ##
-  The dark age of the Internet is now over thanks to STREAM TEAM, an actionable collaborative application designed to boost the synergistic potential of a truly connected world through communal Youtube video sharing.  
+  The dark age of the Internet is now over thanks to STREAM TEAM, an actionable collaborative application designed to boost the synergistic potential of a truly connected world through communal Youtube video sharing.  Utilizing the MEAN stack, the Youtube API , Socket.IO, Bootstrap, Passport, and Heroku, witness the majestic dawning of a generation freed from the shadows of the past, when subpar video collabation was grimly tolerated.  
 
 ## Problem ##
   Too long have users labored without the ability to adequately share Youtube videos in real time, instead relegated to anachronistic means to tell friends about the incredible gems found within the depths of video valhalla through slow, outdated modes.  E-mail, text messages, and word of mouth can no longer keep up with the frantic pace of modern society, where precious seconds and minutes are wasted every day during the struggle to share Youtube revelry.
