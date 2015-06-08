@@ -1,6 +1,6 @@
 // #DD calls the core app module
 angular.module('core')
-// #DD Establish functionality for pressing the enter key, 
+// #DD Establish functionality for pressing the enter key
 .directive('ngEnter', function () {
 	return function (scope, element, attrs) {
 		element.bind("keypress", function (event) {
