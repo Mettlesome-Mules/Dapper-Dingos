@@ -17,28 +17,28 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > STREAM TEAM 
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > A real time Youtube sharing application!
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > The dark ages of the Internet is now over thanks to STREAM TEAM, an actionable collaborative application designed to boost the synergistic potential of a truly connected world through communal Youtube video sharing.  
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Too long have users labored without the ability to adequately share Youtube videos in real time, instead relegated to anachronistic means to tell friends about the incredible gems found within the depths of video valhalla through slow, outdated modes.  E-mail, text messages, and word of mouth can no longer keep up with the frantic pace of modern society, where precious seconds and minutes are wasted every day during the struggle to share Youtube revelry.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > Enter STREAM TEAM, a full fledged multi-faceted solution to a years old problem.  Once online, users gain access to an incredibly robust set of tools to dynamically share Youtube videos, enabling a truly connected team environment to exist in the digital space to supercharge lightning quick participation in a fast moving world.  
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "We believe STREAM TEAM heralds the next entertainment epoch of the millenium of all time everywhere for the rest of history combined through the end of days of humanity.  We will all reach the final second together, and then pick another video to satiate our endless need for distraction."
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Once users have logged into https://dapperdingos.herokuapp.com, a real time sharing experience POWERHOUSE is immediately available, enabling an exciting new era of instant gratification.  
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "My family life has never been more actualized!  Now I can watch videos while my children stay in their rooms safely in the glow of their screens while we all laugh in distinctly remote locations far away from each other, bringing us closer together than ever before!  Now their frequent visits to the hospital will never be as lonely!"
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Demand that your online minutia be MAXIMIZED through the first truly team-centric approach to Youtube enjoyment.  Remove the shackles imposed by your invisible overlords, and take control of your electronic destiny today with STREAM TEAM, an energized call to power that makes the world a better place socially forever through outreach based grassroots efforts all around the globe.  Never face uncertainty in life again as you show the Internet the undeniable POWER of STREAM TEAM!
