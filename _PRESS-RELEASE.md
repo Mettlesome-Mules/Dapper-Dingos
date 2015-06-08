@@ -17,7 +17,6 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## A real time Youtube sharing application! ##
-  STREAM TEAM 
 
 ## Summary ##
   The dark age of the Internet is now over thanks to STREAM TEAM, an actionable collaborative application designed to boost the synergistic potential of a truly connected world through communal Youtube video sharing.  
