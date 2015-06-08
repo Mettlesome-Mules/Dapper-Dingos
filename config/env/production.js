@@ -25,6 +25,7 @@ module.exports = {
 	},
 	//#DD: Entries for Facebook, Twitter, Linked In, and Github have been removed
 	//#DD: These authorization stratgies were not utilized in the project
+	
 	google: {
 		clientID: process.env.GOOGLE_ID || '514791028469-vtvgnb6evriqu757ph87gvf74crkfcv6.apps.googleusercontent.com',
 		clientSecret: process.env.GOOGLE_SECRET || 'Dvn7XJenZSfsQV9YcgLmhdBN',
