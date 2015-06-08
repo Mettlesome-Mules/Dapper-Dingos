@@ -3,19 +3,25 @@
 /**
  * Module dependencies.
  */
-var passport = require('passport');
+var passport = require('passport'),
+	socketio = require('socket.io'),
+	http = require('http')
+
+
+
+
 
 module.exports = function(app) {
 	// User Routes
 	var users = require('../../app/controllers/users.server.controller');
+	var mongoose = require('mongoose');
 
 	// Setting up the users authentication api
 	app.route('/auth/signup').post(users.signup);
 	app.route('/auth/signin').post(users.signin);
 	app.route('/auth/signout').get(users.signout);
 
-	//#DD setting up the chat messenger routing
-	// app.route('/message').get(users.messages)
+
 
 	// #DD Setting the google oauth routes
 	app.route('/auth/google').get(passport.authenticate('google', {

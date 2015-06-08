@@ -1,14 +1,10 @@
 <section data-ng-controller="HomeController">
 	<div class="jumbotron text-center" data-ng-hide="authentication.user">
-		<div class="hometext">Stream Team v0.1</div>
+		<div class="hometext">Stream Team</div>
 	</div>
 		<div class='homebtn'><a class="btn" data-ng-hide="authentication.user" href="/#!/signin">SignUp/Login</a></div>
-		<div class='youtube' data-ng-show="authentication.user">
-		<youtube></youtube>
+	</div>
+	<div class='btnCtn'>
+			<div class='homebtn'><a class='btn' data-ng-show="authentication.user" href="/#!/main">JOIN YOUR FRIENDS!</a></div>
 	</div>
 </section>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io();
-</script>

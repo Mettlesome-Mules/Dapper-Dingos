@@ -1,5 +1,5 @@
 body{
-	background-image: url('http://s3.amazonaws.com/digitaltrends-uploads-prod/2014/10/Multiple-screens-Google-X-project.jpg');
+	background-image: url('http://www.highresolutiontextures.com/textures/concrete-walls/hrt-concrete-wall-02.jpg');
 	background-size: cover;
 }
 .content {
@@ -44,6 +44,21 @@ body{
 	opacity: 0.8
 }
 
+.btn2{
+	background-color: #dcdcdc;
+	font-size: 65px;
+	opacity: 0.8
+}
+
+.btnCtn{
+	text-align: center;
+	width: 100%;
+	left: 50%;
+	top:50%;
+	padding-top:250px;
+
+}
+
 .youtube{
 	text-align: center;
 	position: absolute;
@@ -86,13 +101,20 @@ body{
 	float: left;
 }
 
-.searchYT{
-/*	margin: 0 auto;
-	display: table;
-	height: 50px;
-	background-color: gray;
-  clear: both;
-  border: black 1px solid;*/
+.chatBar{
+	overflow: scroll;
 }
 
 
+
+.input{
+	position: absolute;
+}
+
+.chat{
+	margin-top: 60px;
+}
+
+.youtube{
+	margin-top: 50px;
+}
