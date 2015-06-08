@@ -1,5 +1,7 @@
 'use strict';
 
+// #DD This is necessary to keep the navigation bar on the top of the page workign
+
 angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
 	function($scope, Authentication, Menus) {
 		$scope.authentication = Authentication;
