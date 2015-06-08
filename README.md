@@ -1,4 +1,35 @@
+
 Stream Team: A Dapper Dingos Joint
+=======
+#DD                                           #DD
+|-----------------------------------------------|
+|---------- WELCOME MEDDLESOME MULES -----------|   Hey friends - below is a short map to our app!
+|-----------------------------------------------|
+#DD                                           #DD
+  
+
+First off - know that we used a MEAN js yeoman scaffold. This is why there are so many directories/files.
+
+Directories/files with significant changes:
+
+  config/express.js - this is where socket.io connections are made with the server instance
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
 
 ![alt tag](http://i62.tinypic.com/2vxmzdc.jpg)
 

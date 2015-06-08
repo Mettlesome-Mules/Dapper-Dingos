@@ -1,5 +1,5 @@
 'use strict';
-
+// #DD - 
 module.exports = {
 	db: 'mongodb://dapperdingo:dapperpw@ds041032.mongolab.com:41032/dapper-dingosdb',
 	app: {
