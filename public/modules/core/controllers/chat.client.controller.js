@@ -38,7 +38,6 @@ angular.module('core')
 	$scope.messages = [];
 
 	var socket = io.connect();
-=======
 
     // #DD load previous messages from chat
   socket.on('pastMessages', function (data) {
@@ -61,4 +60,3 @@ angular.module('core')
   };
   socket.emit('getUsers');
 }]);
->>>>>>> rebasing
