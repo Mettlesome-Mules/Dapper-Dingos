@@ -38,6 +38,34 @@ angular.module('core')
 	$scope.messages = [];
 
 	var socket = io.connect();
+<<<<<<< HEAD
+	// #DD load previous messages from chat
+	socket.on('pastMessages', function (data) {
+		// console.log(data, 'past')
+		$scope.messages = data.reverse();
+		// data.forEach(function (message) {
+		// 	$scope.messages.unshift(message);
+		// })
+		$scope.$apply();
+	});
+
+
+
+	//#DD using the local authentication as a condition, send a message to the server
+	$scope.sendMessage = function () {
+		console.log("Send message event triggered", $scope.userName)
+
+		var chatMessage = {
+			'username' : $scope.userName.username,
+			'message' : $scope.message
+		};
+
+		socket.emit('newMessage',chatMessage);
+		$scope.message = '';
+		};
+
+		socket.emit('getUsers')
+}]);
 =======
 
     // #DD load previous messages from chat
