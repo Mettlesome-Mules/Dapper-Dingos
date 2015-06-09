@@ -13,4 +13,12 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			templateUrl: 'modules/core/views/home.client.view.html'
 		});
 	}
-]);
+])
+// .run(['Menus',
+// 	function(Menus) {
+// 		// Set top bar menu items
+// 		Menus.addMenuItem('topbar', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
+// 		Menus.addSubMenuItem('topbar', 'articles', 'List Articles', 'articles');
+// 		Menus.addSubMenuItem('topbar', 'articles', 'New Article', 'articles/create');
+// 	}
+// ]);

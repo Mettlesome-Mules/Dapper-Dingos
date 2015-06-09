@@ -1,7 +1,19 @@
 body{
-	background-image: url('http://www.highresolutiontextures.com/textures/concrete-walls/hrt-concrete-wall-02.jpg');
+	/*background-image: url('http://www.highresolutiontextures.com/textures/concrete-walls/hrt-concrete-wall-02.jpg');*/
 	background-size: cover;
 }
+
+.navbar-header {
+	background-color: #FFF;
+}
+.glyphicon {
+    font-size: 27px;
+    color: #EEE;
+}
+.navbar-brand {
+	background-color: #FFF;
+}
+
 .content {
 	margin-top: 50px;
 }

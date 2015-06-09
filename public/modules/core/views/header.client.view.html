@@ -1,8 +1,8 @@
 <div class="container" data-ng-controller="HeaderController">
-	<div class="navbar-header">
-		<a href="/#!/" class="navbar-brand">Welcome to Stream Team</a>
+<!-- 	<div class="navbar-header">
+		<a href="/#!/" class="navbar-brand">yt@same</a>
 	</div>
-	<nav class="collapse navbar-collapse" role="navigation">
+ -->	<nav class="collapse navbar-collapse" role="navigation">
 
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
 			<li ui-route="/signup" ng-class="{active: $uiRoute}">
@@ -15,16 +15,27 @@
 		</ul>
 
 
-		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
-			<li class="dropdown">
-				
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<span data-ng-bind="authentication.user.displayName"></span></b>
+		<ul class="nav navbar-nav navbar-fixed-left" data-ng-show="authentication.user">
+			<li class="dropdown" dropdown>
+				<a href="#" class="dropdown-toggle glyphicon glyphicon-cog" data-toggle="dropdown" dropdown-toggle>
+<!-- 					 <b class="caret"></b> -->
 				</a>
-
-				<li ui-route="/auth/signout"   >
-					<a href="/auth/signout">Logout</a>
-				</li>
+				<span data-ng-bind="authentication.user.displayName" ></span>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="/#!/settings/profile">Edit Profile</a>
+					</li>
+					<li>
+						<a href="/#!/settings/accounts">Manage Social Accounts</a>
+					</li>
+					<li data-ng-show="authentication.user.provider === 'local'">
+						<a href="/#!/settings/password">Change Password</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="/auth/signout">Signout</a>
+					</li>
+				</ul>
 			</li>
 		</ul>
 	</nav>
