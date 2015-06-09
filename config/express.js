@@ -179,9 +179,20 @@
 
     var Message = mongoose.model('Message', chatMessage);
 
+    var rooms = ['room1','room2','room3','room4'];
+
     //#DD IO function to receiev events and relay them to users
     io.sockets.on('connection', function (socket) {
     	console.log('a user connected');
+
+
+      //Start Justin Code
+
+      socket.on('sendRooms', function(){
+        io.emit('sendingRooms', ['room1','room2','room3','room4'])
+        console.log('sending rooms')
+      })
+      //End Justin Code
 
 
         //socket function for starting video #DD

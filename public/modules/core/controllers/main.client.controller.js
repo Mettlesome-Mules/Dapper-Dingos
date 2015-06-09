@@ -7,21 +7,29 @@ angular.module('core')
 		$scope.menu = Menus.getMenu('topbar');
 
 		$scope.ytQuery = '';
+    var socket = io.connect();
+    $scope.socketTest = function() {
+      console.log('socketTest button pressed')
+      socket.emit('sendRooms');
+    };
+    socket.on('sendingRooms', function(rooms) {
+      $scope.rooms = rooms
+    })
+    //#DD input box function for taking the submitted string and parsing into a videoKey.
+    $scope.ytSearcher = function(){
 
-		//#DD input box function for taking the submitted string and parsing into a videoKey.
-		$scope.ytSearcher = function(){
+      var video_id = $scope.ytQuery.split('v=')[1];
+      console.log(video_id, $scope.ytQuery)
+        if(video_id.indexOf('&') !== -1) {
+        var ampersandPosition = video_id.indexOf('&');
+          video_id = video_id.substring(0, ampersandPosition);
+        } else {
+          video_id = video_id.substring(0, video_id.length);
+        }
+        
+        var socket = io.connect();
+        // #DD triggers url change via sockets, sends videoID as data
 
-			var video_id = $scope.ytQuery.split('v=')[1];
-			console.log(video_id, $scope.ytQuery)
-				if(video_id.indexOf('&') !== -1) {
-				var ampersandPosition = video_id.indexOf('&');
-				  video_id = video_id.substring(0, ampersandPosition);
-				} else {
-				  video_id = video_id.substring(0, video_id.length);
-				}
-				
-				var socket = io.connect();
-				// #DD triggers url change via sockets, sends videoID as data
 				socket.emit('changingUrl', video_id)
 		}
 
