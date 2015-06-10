@@ -38,9 +38,7 @@ angular.module('core')
 					var socket = io.connect();
 					// #DD triggers url change via sockets, sends videoID as data
 					socket.emit('changingUrl', video_id)
-				}
 			}
-
 			$scope.video_results = ['abc','123','456']
 		}
 		$scope.toggleCollapsibleMenu = function() {
