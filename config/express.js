@@ -174,7 +174,8 @@
     // #DD create Schema for messages
     var chatMessage = new mongoose.Schema({
     	username: String,
-    	message: String
+    	message: String,
+      room: String
     });
 
     var Message = mongoose.model('Message', chatMessage);

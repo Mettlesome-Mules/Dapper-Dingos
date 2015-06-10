@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/dapper-dingos-test',
+	db: 'mongodb://mettle:neighneigh@ds033607.mongolab.com:33607/thesignup2-dev/dapper',
 	port: 3001,
 	app: {
 		title: 'Dapper-Dingos - Test Environment'
