@@ -9,7 +9,11 @@ angular.module('core')
 		$scope.menu = Menus.getMenu('topbar');
 		$scope.rooms = ['room1','room2','bigroom3','smallroom4'];
 		$scope.room_search;
-
+		$scope.createRoom = function(roomName) {
+			console.log('TODO: createRoom', roomName)
+			$scope.rooms.push(roomName)
+			$scope.room_search = '';
+		}
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
 		};
