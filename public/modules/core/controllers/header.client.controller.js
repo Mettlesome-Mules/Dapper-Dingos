@@ -2,11 +2,13 @@
 
 // #DD This is necessary to keep the navigation bar on the top of the page workign
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
-	function($scope, Authentication, Menus) {
+angular.module('core')
+.controller('HeaderController', ['$scope', 'Authentication', 'Menus', function($scope, Authentication, Menus) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
+		$scope.rooms = ['room1','room2','bigroom3','smallroom4'];
+		$scope.room_search;
 
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;

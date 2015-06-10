@@ -15,7 +15,17 @@
 		</ul>
 
 
+
 		<ul class="nav navbar-nav navbar-fixed-left" data-ng-show="authentication.user">
+			<li class="dropdown" dropdown>
+				<a href="#" class="dropdown-toggle glyphicon glyphicon-film" data-toggle="dropdown" dropdown-toggle></a>
+					<ul class='dropdown-menu'>
+						<input placeholder="Search..." type="text" name="" id="" ng-model='room_search' ng-click="$event.stopPropagation()" ng-change=''>
+						<li ng-repeat="room in rooms | filter:room_search | limitTo:2">
+							<a>{{ room }}</a>
+						</li>
+					</ul>
+			</li>
 			<li class="dropdown" dropdown>
 				<a href="#" class="dropdown-toggle glyphicon glyphicon-cog" data-toggle="dropdown" dropdown-toggle>
 <!-- 					 <b class="caret"></b> -->
