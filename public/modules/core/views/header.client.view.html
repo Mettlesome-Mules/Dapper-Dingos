@@ -16,7 +16,7 @@
 					<ul class='dropdown-menu'>
 						<input placeholder="Search..." type="text" name="" id="" ng-model='room_search' ng-click="$event.stopPropagation()" ng-change=''>
 						<li data-ng-repeat="room in rooms | filter:room_search | limitTo:4">
-							<a ng-click='changeRoom({{room.name}})'>{{ room.name}}</a>
+							<a ng-click='changeRoom(room.name)'>{{room.name}}</a>
 						</li>
 						<li ng-show="(rooms | filter:room_search).length == 0"><a ng-click='createRoom(room_search)' class='glyphicon glyphicon-plus' style='font-size: 12px'>  Create this Room</a></li>
 					</ul>
