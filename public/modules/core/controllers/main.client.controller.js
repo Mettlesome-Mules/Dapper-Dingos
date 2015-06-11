@@ -74,10 +74,11 @@ angular.module('core')
         } else {
           video_id = video_id.substring(0, video_id.length);
         }
+        console.log(video_id)
         
         var socket = io.connect();
         // #DD triggers url change via sockets, sends videoID as data
-
+        console.log(video_id)
 				socket.emit('changingUrl', video_id)
 		}
 
@@ -109,14 +110,6 @@ angular.module('core')
 
 			onPlayerReady: function(event){
 		   	console.log('player ready')
-		}
-	}
-})
-
-.factory('youtubeApiCalls', function(){
-	return {
-		apiCall: function() {
-
 		}
 	}
 })
@@ -170,7 +163,7 @@ angular.module('core')
 
 	      // #DD socket trigger for changing URL
 				socket.on('changeVid', function(urlKey){
-					console.log('changing video Url')
+					console.log('changing video Url', urlKey)
 					// #DDyoutube API function for cueing new video
 					player.cueVideoByUrl({ mediaContentUrl: 'http://www.youtube.com/v/' + urlKey + '?version=5'})
 					console.log('loading new Url')

@@ -82,20 +82,24 @@ angular.module('core')
 			.success(function(data) {
 				console.log('mainctrl', data.items[0].id.videoId);
 				$scope.video_search_results = data.items;
-				console.log('mainctrl.succes', $scope.searches)
-				var socket = io.connect();
-
-				socket.emit('changingUrl', data.items)
+				console.log('mainctrl.succes', $scope.video_search_results)
 			})
 			.error(function () {
 				console.log('err')
 			})
 		},
-
+		$scope.urlEmit = function() {
+			console.log('urlEmit', $scope.video_search_results[0].id.videoId)
+			var socket = io.connect();
+			socket.emit('changingUrl', $scope.video_search_results[0].id.videoId)
+		}
 		// Collapsing the menu after navigation
 		$scope.$on('$stateChangeSuccess', function() {
 			$scope.isCollapsed = false;
 		});
+		$scope.queue = function() {
+			
+		}
 
 	}
 ]);
