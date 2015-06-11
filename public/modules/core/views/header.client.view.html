@@ -27,7 +27,7 @@
 					<input placeholder="Search for video..." type="text" name="" id="" ng-model='video_search_text' ng-click="$event.stopPropagation()" ng-change='searchYouTube()' ng-blur='clearSearch($event)'>
 					<li data-ng-repeat="video in video_search_results">
 						<div>
-							<h3>{{ video.snippet.title }}</h3>
+							<h3 ng-click="urlEmit()">{{ video.snippet.title }}</h3>
 							<img src='{{video.snippet.thumbnails.default.url}}'></img>
 
 						</div>
