@@ -229,6 +229,13 @@
       });
 
 
+        socket.on('addToQueue', function (video, roomName, error) {
+            console.log('config: express.js: addToQueue', video, roomName)
+            console.log('sdh3e5rhscgssdDGSRGSGWERGWERGGGGGGGGGGGGGGGGGGGGGGGGGGG', video, roomName)
+
+            io.emit('addToQueue', video);
+        });
+
       socket.on('newRoom', function (room) {
         console.log(room, 'Why no name')
 
@@ -267,6 +274,7 @@
         	console.log('relaying new Url')
         	io.emit('changeVid', url);
         });
+
 
         socket.on('getUsers', function () {
           Message.find(function (err, allMessages) {
