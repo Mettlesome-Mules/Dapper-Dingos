@@ -158,7 +158,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default', 'watch', 'nodemon']);
+	grunt.registerTask('default', [ 'concurrent:default', 'watch', 'nodemon']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);

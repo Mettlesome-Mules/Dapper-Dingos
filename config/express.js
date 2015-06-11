@@ -29,13 +29,15 @@
 
 
 
+
     module.exports = function (db) {
     // Initialize express app
     var app = express();
 
     // Globbing model files
     config.getGlobbedFiles('./app/models/**/*.js').forEach(function (modelPath) {
-    	require(path.resolve(modelPath));
+      console.log(path.resolve(modelPath), 'MONGOOSEPATH')
+      require(path.resolve(modelPath));
     });
 
     // Setting application local variables
@@ -174,14 +176,79 @@
     // #DD create Schema for messages
     var chatMessage = new mongoose.Schema({
     	username: String,
-    	message: String
+    	message: String,
+      room: String
     });
 
     var Message = mongoose.model('Message', chatMessage);
 
+    var usernames = {}
+
+
     //#DD IO function to receiev events and relay them to users
     io.sockets.on('connection', function (socket) {
-    	console.log('a user connected');
+      console.log('a user connected');
+
+      var Room = mongoose.model('Room')
+      //Start Justin Code
+      var Rooms =[];
+      
+      Room.find(function(err, data) {
+        console.log('Data:', data)
+        Rooms = data
+      })
+      console.log('Rooms:', Rooms)
+
+      socket.on('pageLoad', function(username) {
+        console.log(username)
+        socket.username = username
+        socket.room = 'lobby'
+        usernames[username] = username
+        console.log(usernames, 'usernames')
+
+        socket.join('lobby')
+
+        io.sockets.in('lobby').emit('updatechat', Rooms);
+      })
+
+      socket.on('sendRooms', function(){
+        io.emit('sendingRooms', Rooms)
+      })
+
+      socket.on('switchRoom', function(newroom){
+        socket.leave(socket.room);
+        socket.join(newroom);
+        console.log('YOU HAVE JOINED ' + newroom)
+        // socket.emit('updatechat', console.log('YOU HAVE JOINED' + newroom));
+        // sent message to OLD room
+        // io.sockets.in(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
+        // update socket session room title
+        socket.room = newroom;
+        // io.sockets.in(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
+        // socket.emit('updaterooms', rooms, newroom);
+      });
+
+
+      socket.on('newRoom', function (room) {
+        console.log(room, 'Why no name')
+
+        if(!Room.find({ name: room.name }), function(err, data) {
+          console.log(err, 'ROOMFIND')
+
+        }){
+          Room.create(room, function (err, room) {
+            if (err) {
+              console.log(err, 'ERROR:')
+              return console.error(err);
+            }
+            console.log('creating to rooms', room);
+          });
+        }else {
+          console.log('Already in db')
+        }
+
+      });
+      //End Justin Code
 
 
         //socket function for starting video #DD
@@ -202,14 +269,16 @@
         });
 
         socket.on('getUsers', function () {
-        	Message.find(function (err, allMessages) {
-        		if (err) {
-        			return console.error(err)
-        		}
-        		console.log('finding all messages with GetUsers')
-        		io.emit('pastMessages', allMessages);
-        	});
+          Message.find(function (err, allMessages) {
+            if (err) {
+              return console.error(err)
+            }
+            console.log('finding all messages with GetUsers', allMessages)
+            io.emit('pastMessages', allMessages);
+          });
         });
+
+
 
 
         socket.on('newMessage', function (message) {

@@ -7,7 +7,7 @@ angular.module('core')
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
-		$scope.rooms = ['room1','room2','bigroom3','smallroom4'];
+		$scope.rooms;
 		$scope.room_search;
 		$scope.video_search;
 		$scope.video_search_focus = false;
@@ -17,10 +17,29 @@ angular.module('core')
 			$scope.video_results = "";
 
 		}
-		$scope.createRoom = function(roomName) {
-			console.log('TODO: createRoom', roomName)
-			$scope.rooms.push(roomName)
-			$scope.room_search = '';
+
+		socket.on('updatechat', function(rooms) {
+      $scope.rooms = rooms
+    })
+
+		$scope.changeRoom = function(roomname) {
+      console.log(roomname, '<-CHANGING TO')
+		  socket.emit('changeRoom', roomname)
+		  var room = {
+		    'admin': '',
+		    'name': roomname
+		  };
+		  socket.emit('newRoom', room);      
+		};
+
+		$scope.createRoom = function(roomname) {
+			console.log(roomname)
+			socket.emit('switchRoom', roomname)
+			var room = {
+			  'admin': '',
+			  'name': roomname
+			};
+			socket.emit('newRoom', room);   
 		}
 		$scope.searchYouTube = function(e){
 			console.log($scope.video_search)

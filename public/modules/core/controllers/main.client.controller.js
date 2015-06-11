@@ -5,23 +5,53 @@ angular.module('core')
 .controller('mainController', ['$scope', 'Menus', function($scope, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
+    $scope.chatrooms;
 
 		$scope.ytQuery = '';
+    var socket = io.connect();
 
-		//#DD input box function for taking the submitted string and parsing into a videoKey.
-		$scope.ytSearcher = function(){
+    socket.emit('pageLoad', 'TestUser')
 
-			var video_id = $scope.ytQuery.split('v=')[1];
-			console.log(video_id, $scope.ytQuery)
-				if(video_id.indexOf('&') !== -1) {
-				var ampersandPosition = video_id.indexOf('&');
-				  video_id = video_id.substring(0, ampersandPosition);
-				} else {
-				  video_id = video_id.substring(0, video_id.length);
-				}
-				
-				var socket = io.connect();
-				// #DD triggers url change via sockets, sends videoID as data
+    
+
+    $scope.changeRoom = function(room) {
+      socket.emit('switchRoom', room)
+      var roomname = {
+        'admin': '',
+        'name': room
+      };
+      socket.emit('newRoom', roomname);      
+    };
+
+    $scope.sendMessage = function () {
+      
+      socket.emit('newMessage', chatMessage);
+      $scope.message = '';
+    };
+
+    $scope.socketTest = function() {
+      console.log('socketTest button pressed')
+      socket.emit('sendRooms');
+    };
+    socket.on('sendingRooms', function(rooms) {
+      $scope.rooms = rooms
+
+    })
+    //#DD input box function for taking the submitted string and parsing into a videoKey.
+    $scope.ytSearcher = function(){
+
+      var video_id = $scope.ytQuery.split('v=')[1];
+      console.log(video_id, $scope.ytQuery)
+        if(video_id.indexOf('&') !== -1) {
+        var ampersandPosition = video_id.indexOf('&');
+          video_id = video_id.substring(0, ampersandPosition);
+        } else {
+          video_id = video_id.substring(0, video_id.length);
+        }
+        
+        var socket = io.connect();
+        // #DD triggers url change via sockets, sends videoID as data
+
 				socket.emit('changingUrl', video_id)
 		}
 
