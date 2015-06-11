@@ -28,7 +28,12 @@ angular.module('core')
 				}
 			})
 			.success(function(data) {
-				console.log('mainctrl', data);
+				console.log('mainctrl', data.items[0].id.videoId);
+				$scope.searches = data.items;
+				console.log('mainctrl.succes', $scope.searches)
+				// var socket = io.connect();
+
+				// socket.emit('changingUrl', data.video_id)
 			})
 			.error(function () {
 				console.log('err')

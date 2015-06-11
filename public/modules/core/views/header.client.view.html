@@ -25,8 +25,8 @@
 				<a href="#" class="dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown" dropdown-toggle></a>
 				<ul class='dropdown-menu' >
 					<input placeholder="Search for video..." type="text" name="" id="" ng-model='video_search' ng-click="$event.stopPropagation()" ng-change='searchYouTube()' ng-blur='clearSearch($event)'>
-					<li data-ng-repeat="result in video_results">
-						<a>{{ result }}</a>
+					<li data-ng-repeat="id in video_search">
+						<a>{{ id }}</a>
 					</li>
 				</ul>
 			</li>
