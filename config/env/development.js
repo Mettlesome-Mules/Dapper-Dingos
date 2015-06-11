@@ -2,6 +2,7 @@
 // #DD - added the url for our mongolab hosted database
 module.exports = {
 	db: 'localhost:27017/socket4me',
+	// db: 'mongodb://dapperdingo:dapperpw@ds041032.mongolab.com:41032/dapper-dingosdb',
 	app: {
 		title: 'Dapper-Dingos - Development Environment'
 	},
