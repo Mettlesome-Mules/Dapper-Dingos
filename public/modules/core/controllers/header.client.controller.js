@@ -9,7 +9,8 @@ angular.module('core')
 		$scope.menu = Menus.getMenu('topbar');
 		$scope.rooms;
 		$scope.room_search;
-		$scope.video_search = [];
+		$scope.video_search_text = '';
+		$scope.video_search_results = [];
 		$scope.video_search_focus = false;
 		$scope.clearSearch = function(e){
 			console.log('CLEAR SEARCH',e)
@@ -74,17 +75,17 @@ angular.module('core')
 					maxResults: '10',
 					part:'id, snippet',
 					fields: 'items/id,items/snippet/title,items/snippet/description,items/snippet/thumbnails/default,items/snippet/channelTitle',
-					q: this.query
+					q: $scope.video_search_text,
 
 				}
 			})
 			.success(function(data) {
 				console.log('mainctrl', data.items[0].id.videoId);
-				$scope.searches = data.items;
+				$scope.video_search_results = data.items;
 				console.log('mainctrl.succes', $scope.searches)
-				// var socket = io.connect();
+				var socket = io.connect();
 
-				// socket.emit('changingUrl', data.video_id)
+				socket.emit('changingUrl', data.items)
 			})
 			.error(function () {
 				console.log('err')

@@ -24,9 +24,13 @@
 			<li class="dropdown row-sm-4" dropdown>
 				<a href="#" class="dropdown-toggle glyphicon glyphicon-film" data-toggle="dropdown" dropdown-toggle></a>
 				<ul class='dropdown-menu' >
-					<input placeholder="Search for video..." type="text" name="" id="" ng-model='video_search' ng-click="$event.stopPropagation()" ng-change='searchYouTube()' ng-blur='clearSearch($event)'>
-					<li data-ng-repeat="id in video_search">
-						<a>{{ id }}</a>
+					<input placeholder="Search for video..." type="text" name="" id="" ng-model='video_search_text' ng-click="$event.stopPropagation()" ng-change='searchYouTube()' ng-blur='clearSearch($event)'>
+					<li data-ng-repeat="video in video_search_results">
+						<div>
+							<h3>{{ video.snippet.title }}</h3>
+							<img src='{{video.snippet.thumbnails.default.url}}'></img>
+
+						</div>
 					</li>
 				</ul>
 			</li>
