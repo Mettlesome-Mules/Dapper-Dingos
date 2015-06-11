@@ -3,12 +3,13 @@
 angular.module('core')
 
 .controller('mainController', ['$scope', '$http', 'Menus', function($scope, $http, Menus) {
-		$scope.isCollapsed = false;
-		$scope.menu = Menus.getMenu('topbar');
-    $scope.chatrooms;
+	$scope.isCollapsed = false;
+	$scope.menu = Menus.getMenu('topbar');
+	$scope.chatrooms;
+	$scope.queuedVideos = ['title1', 'title2'];
 
-		$scope.searches = [];
-		$scope.ytQuery = '';
+	$scope.searches = [];
+	$scope.ytQuery = '';
     var socket = io.connect();
 
     socket.emit('pageLoad', 'TestUser')
