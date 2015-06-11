@@ -3,14 +3,19 @@
         <div class="navbar-header"></div>
         <nav class="collapse navbar-collapse" role="navigation">
         </nav>
-        <div class="searchYT">
+        <form id="search">
+            <input id='query' name='q' type="text" data-ng-model="query" placeholder="type video" data-ng-model="searches" ng-click="search()" data-ng-model="searches"/>
+            <div ng-show="searches"></div>
+            <input id='submit' name='submitSearch'  class='btn btn-primary' data-ng-click="search()" value='Search'/> 
+        </form>
+     <!--    <div class="searchYT">
             <br>
             <input type="text" ng-enter='ytSearcher()' ng-model="ytQuery" placeholder='Paste in a video link here!' size='70'></input>
             <button class="btn btn-primary" size='10' ng-click='ytSearcher()'>Submit</button>
-        </div>
-        <div class='youtube'>
+        </div> -->
+    <!--     <div class='youtube'>
             <youtube width="640" height="390" vid=''></youtube>
-        </div>
+        </div> -->
         
   <!--
   #DD: This was originally meant to list active users, but
