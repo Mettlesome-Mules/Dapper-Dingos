@@ -3,13 +3,13 @@
         <div class="navbar-header"></div>
         <nav class="collapse navbar-collapse" role="navigation">
         </nav>
-        <div class="searchYT">
+<!--         <div class="searchYT">
             <br>
             <input type="text" ng-enter='ytSearcher()' ng-model="ytQuery" placeholder='Paste in a video link here!' size='70'></input>
             <button class="btn btn-primary" size='10' ng-click='ytSearcher()'>Submit</button>
-        </div>
-        <div class='youtube'>
-            <youtube width="640" height="390" vid=''></youtube>
+        </div> -->
+        <div class="youtube embed-responsive embed-responsive-4by3">
+            <youtube class="embed-responsive-item" width="640" height="390" vid=''></youtube>
         </div>
         
   <!--
@@ -18,19 +18,21 @@
 		<div class="chatUsersContainer"></div>
 			<div class="chatBarUsers"></div> -->
 
-        <div class="chatContainer">
-            <div class="chatBar" ng-controller='chatController'>
-                <div class='input'>
-                    <input type="text" ng-enter='sendMessage()' ng-model='message' placeholder='Chat with your friends here!' size='85'></input>
-                    <button class="btn btn-primary" ng-click='sendMessage()'>Submit</button>
-                    <!-- <p>Filter Messages:
-				<input type="text" ng-model='filterText'> -->
-                </div>
+        <div class="chatContainer" ng-controller='chatController'>
+            <div class="chat-history" >
                 <div class='chat'>
                         <div id="chats" ng-repeat='text in messages'>
-                            {{text.username}} - {{text.message}}
+                            <div>{{text.username}}</div>
+                            <p>{{text.message}}</p>
                         </div>
                 </div>
             </div>
+            <div class='chat-submit-container'>
+                <input id='chat-submit-input' type="text" ng-enter='sendMessage()' ng-model='message' placeholder='Chat with your friends here!'></input>
+                <button class="chat-submit-button" ng-click='sendMessage()' style='right: 0px;'>Submit</button>
+                <!-- <p>Filter Messages:
+            <input type="text" ng-model='filterText'> -->
+            </div>
         </div>
+    </div>
 </section>
