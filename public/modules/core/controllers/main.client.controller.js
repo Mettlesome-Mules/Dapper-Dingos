@@ -2,15 +2,41 @@
 
 angular.module('core')
 
-.controller('mainController', ['$scope', 'Menus', function($scope, Menus) {
+.controller('mainController', ['$scope', '$http', 'Menus', function($scope, $http, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
     $scope.chatrooms;
 
+		$scope.searches = [];
 		$scope.ytQuery = '';
     var socket = io.connect();
 
     socket.emit('pageLoad', 'TestUser')
+		$scope.search = function() {
+			console.log('mainctrl searching')
+			$http({
+				method: 'GET',
+				url: 'https://www.googleapis.com/youtube/v3/search',
+				params: {
+					key: 'AIzaSyBU7VNaj493eV7o9dEu06kWLvQuxU4usrs',
+					type: 'video',
+					maxResults: '10',
+					part:'id, snippet',
+					fields: 'items/id,items/snippet/title,items/snippet/description,items/snippet/thumbnails/default,items/snippet/channelTitle',
+					q: this.query
+
+				}
+			})
+			.success(function(data) {
+				console.log('mainctrl', data);
+			})
+			.error(function () {
+				console.log('err')
+			})
+		},
+
+		//#DD input box function for taking the submitted string and parsing into a videoKey.
+		$scope.ytSearcher = function(){
 
     
 
@@ -83,6 +109,14 @@ angular.module('core')
 
 			onPlayerReady: function(event){
 		   	console.log('player ready')
+		}
+	}
+})
+
+.factory('youtubeApiCalls', function(){
+	return {
+		apiCall: function() {
+
 		}
 	}
 })
