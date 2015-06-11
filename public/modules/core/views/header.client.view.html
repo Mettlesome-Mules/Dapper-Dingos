@@ -1,5 +1,5 @@
-<div class="container" data-ng-controller="HeaderController">
- 	<nav class="collapse navbar-collapse" role="navigation">
+<div class="container navbar-header" data-ng-controller="HeaderController">
+ 	<nav class="navbar-collapse" role="navigation">
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
 			<li ui-route="/signup" ng-class="{active: $uiRoute}">
 				<a href="/#!/signup">Sign Up</a>
@@ -10,9 +10,9 @@
 			</li>
 		</ul>
 
-		<ul class="nav navbar-nav navbar-fixed-left" data-ng-show="authentication.user">
-			<li class="dropdown" dropdown>
-				<a href="#" class="dropdown-toggle glyphicon glyphicon-film" data-toggle="dropdown" dropdown-toggle></a>
+		<ul class="nav nav-stacked" data-ng-show="authentication.user">
+			<li class="dropdown row-sm-4" dropdown>
+				<a href="#" class="dropdown-toggle glyphicon glyphicon-glass" data-toggle="dropdown" dropdown-toggle></a>
 					<ul class='dropdown-menu'>
 						<input placeholder="Search..." type="text" name="" id="" ng-model='room_search' ng-click="$event.stopPropagation()" ng-change=''>
 						<li data-ng-repeat="room in rooms | filter:room_search | limitTo:4">
@@ -21,8 +21,8 @@
 						<li ng-show="(rooms | filter:room_search).length == 0"><a ng-click='createRoom(room_search)' class='glyphicon glyphicon-plus' style='font-size: 12px'>  Create this Room</a></li>
 					</ul>
 			</li>
-			<li class="dropdown" dropdown>
-				<a href="#" class="dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown" dropdown-toggle></a>
+			<li class="dropdown row-sm-4" dropdown>
+				<a href="#" class="dropdown-toggle glyphicon glyphicon-film" data-toggle="dropdown" dropdown-toggle></a>
 				<ul class='dropdown-menu' >
 					<input placeholder="Search for video..." type="text" name="" id="" ng-model='video_search' ng-click="$event.stopPropagation()" ng-change='searchYouTube()' ng-blur='clearSearch($event)'>
 					<li data-ng-repeat="id in video_search">
@@ -30,7 +30,7 @@
 					</li>
 				</ul>
 			</li>
-			<li class="dropdown" dropdown>
+			<li class="dropdown row-sm-4" dropdown>
 				<a href="#" class="dropdown-toggle glyphicon glyphicon-cog" data-toggle="dropdown" dropdown-toggle>
 <!-- 					 <b class="caret"></b> -->
 				</a>
