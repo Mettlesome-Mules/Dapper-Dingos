@@ -8,7 +8,7 @@
             <div ng-show="searches"></div>
             <input id='submit' name='submitSearch'  class='btn btn-primary' data-ng-click="search()" value='Search'/> 
         </form>
-     <!--    <div class="searchYT">
+        <!-- <div class="searchYT">
             <br>
             <input type="text" ng-enter='ytSearcher()' ng-model="ytQuery" placeholder='Paste in a video link here!' size='70'></input>
             <button class="btn btn-primary" size='10' ng-click='ytSearcher()'>Submit</button>
@@ -23,8 +23,6 @@
 		<div class="chatUsersContainer"></div>
 			<div class="chatBarUsers"></div> -->
 
-        <div class="chatContainer" ng-controller='chatController'>
-            <div class="chat-history" >
                 <div class='chat'>
                         <div id="chats" ng-repeat='text in messages'>
                             <div>{{text.username}}</div>

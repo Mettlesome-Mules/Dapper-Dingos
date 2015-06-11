@@ -39,10 +39,6 @@ angular.module('core')
 				console.log('err')
 			})
 		},
-
-		//#DD input box function for taking the submitted string and parsing into a videoKey.
-		$scope.ytSearcher = function(){
-
     
 
     $scope.changeRoom = function(room) {
