@@ -11,7 +11,7 @@
 /**
  * Room Schema
  */
- var Rooms = new mongoose.Schema({
+ var Room = new mongoose.Schema({
   name: {
     type: String,
    default: ''     
@@ -27,4 +27,4 @@
   }
 });
 
- module.exports = mongoose.model('Room', Rooms);
+ module.exports = mongoose.model('Room', Room);

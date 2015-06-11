@@ -12,9 +12,7 @@ angular.module('core')
 
     socket.emit('pageLoad', 'TestUser')
 
-    socket.on('updatechat', function(rooms) {
-      $scope.chatrooms = rooms
-    })
+    
 
     $scope.changeRoom = function(room) {
       socket.emit('switchRoom', room)

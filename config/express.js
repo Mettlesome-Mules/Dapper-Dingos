@@ -25,7 +25,7 @@
     consolidate = require('consolidate'),
     path = require('path'),
     mongoose = require('mongoose');
-    
+
 
 
 
@@ -40,7 +40,6 @@
       require(path.resolve(modelPath));
     });
 
-    var Room = require('./app/models/rooms.server.model.js')
     // Setting application local variables
     //#DD: Removed Facebook client ID line here (unused strategy)
     app.locals.title = config.app.title;
@@ -185,14 +184,20 @@
 
     var usernames = {}
 
-    var rooms = ['lobby', 'room1', 'room2', 'room3', 'room4'];
 
     //#DD IO function to receiev events and relay them to users
     io.sockets.on('connection', function (socket) {
-    	console.log('a user connected');
+      console.log('a user connected');
 
-
+      var Room = mongoose.model('Room')
       //Start Justin Code
+      var Rooms =[];
+      
+      Room.find(function(err, data) {
+        console.log('Data:', data)
+        Rooms = data
+      })
+      console.log('Rooms:', Rooms)
 
       socket.on('pageLoad', function(username) {
         console.log(username)
@@ -203,17 +208,17 @@
 
         socket.join('lobby')
 
-        io.sockets.in('lobby').emit('updatechat', rooms);
+        io.sockets.in('lobby').emit('updatechat', Rooms);
       })
 
       socket.on('sendRooms', function(){
-        io.emit('sendingRooms', ['room1','room2','room3','room4'])
+        io.emit('sendingRooms', Rooms)
       })
 
       socket.on('switchRoom', function(newroom){
         socket.leave(socket.room);
         socket.join(newroom);
-        console.log('YOU HAVE JOINED' + newroom)
+        console.log('YOU HAVE JOINED ' + newroom)
         // socket.emit('updatechat', console.log('YOU HAVE JOINED' + newroom));
         // sent message to OLD room
         // io.sockets.in(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
@@ -224,14 +229,24 @@
       });
 
 
-      socket.on('newRoom', function (roomname) {
-        console.log(roomname, 'before function');
-        Room.create(roomname, function (err, roomname) {
-          if (err) {
-            return console.error(err);
-          }
-          console.log('posting to roomnames', roomname);
-        });
+      socket.on('newRoom', function (room) {
+        console.log(room, 'Why no name')
+
+        if(!Room.find({ name: room.name }), function(err, data) {
+          console.log(err, 'ROOMFIND')
+
+        }){
+          Room.create(room, function (err, room) {
+            if (err) {
+              console.log(err, 'ERROR:')
+              return console.error(err);
+            }
+            console.log('creating to rooms', room);
+          });
+        }else {
+          console.log('Already in db')
+        }
+
       });
       //End Justin Code
 
