@@ -21,6 +21,7 @@
   },
     messages: [
   ],
+    queue: [],
   created: {
     type: Date,
     default: Date.now

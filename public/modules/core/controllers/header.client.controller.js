@@ -88,10 +88,13 @@ angular.module('core')
 				console.log('err')
 			})
 		},
-		$scope.urlEmit = function() {
-			console.log('urlEmit', $scope.video_search_results[0].id.videoId)
+		$scope.urlEmit = function(video) {
+			console.log('urlEmit', video.id.videoId)
 			var socket = io.connect();
-			socket.emit('changingUrl', $scope.video_search_results[0].id.videoId)
+			socket.emit('changingUrl', video.id.videoId)
+			console.log('AFTER CHANGED VIDEO URL')
+			socket.emit('addToQueue', video, 'RoomNameHere')
+			console.log('AFTER ADDTOQUEUE')
 		}
 		// Collapsing the menu after navigation
 		$scope.$on('$stateChangeSuccess', function() {

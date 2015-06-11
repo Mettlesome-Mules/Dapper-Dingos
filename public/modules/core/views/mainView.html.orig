@@ -1,0 +1,61 @@
+<section data-ng-controller="mainController">
+    <div class="container" data-ng-controller="mainController">
+        <div class="navbar-header"></div>
+        <nav class="collapse navbar-collapse" role="navigation">
+        </nav>
+<<<<<<< HEAD
+        <form id="search">
+            <input id='query' name='q' type="text" data-ng-model="query" placeholder="type video" data-ng-model="searches" ng-click="search()" data-ng-model="searches"/>
+            <div ng-show="searches"></div>
+            <input id='submit' name='submitSearch'  class='btn btn-primary' data-ng-click="search()" value='Search'/> 
+        </form>
+     <!--    <div class="searchYT">
+||||||| merged common ancestors
+        <div class="searchYT">
+=======
+<!--         <div class="searchYT">
+>>>>>>> restyled main/chat view continued
+            <br>
+            <input type="text" ng-enter='ytSearcher()' ng-model="ytQuery" placeholder='Paste in a video link here!' size='70'></input>
+            <button class="btn btn-primary" size='10' ng-click='ytSearcher()'>Submit</button>
+<<<<<<< HEAD
+        </div> -->
+    <!--     <div class='youtube'>
+            <youtube width="640" height="390" vid=''></youtube>
+        </div> -->
+||||||| merged common ancestors
+        </div>
+        <div class='youtube'>
+            <youtube width="640" height="390" vid=''></youtube>
+        </div>
+=======
+        </div> -->
+        <div class="youtube embed-responsive embed-responsive-4by3">
+            <youtube class="embed-responsive-item" width="640" height="390" vid=''></youtube>
+        </div>
+>>>>>>> restyled main/chat view continued
+        
+  <!--
+  #DD: This was originally meant to list active users, but
+  was not added due to time constraints 
+		<div class="chatUsersContainer"></div>
+			<div class="chatBarUsers"></div> -->
+
+        <div class="chatContainer" ng-controller='chatController'>
+            <div class="chat-history" >
+                <div class='chat'>
+                        <div id="chats" ng-repeat='text in messages'>
+                            <div>{{text.username}}</div>
+                            <p>{{text.message}}</p>
+                        </div>
+                </div>
+            </div>
+            <div class='chat-submit-container'>
+                <input id='chat-submit-input' type="text" ng-enter='sendMessage()' ng-model='message' placeholder='Chat with your friends here!'></input>
+                <button class="chat-submit-button" ng-click='sendMessage()' style='right: 0px;'>Submit</button>
+                <!-- <p>Filter Messages:
+            <input type="text" ng-model='filterText'> -->
+            </div>
+        </div>
+    </div>
+</section>
