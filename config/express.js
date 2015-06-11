@@ -25,6 +25,7 @@
     consolidate = require('consolidate'),
     path = require('path'),
     mongoose = require('mongoose');
+    
 
 
 
@@ -35,9 +36,11 @@
 
     // Globbing model files
     config.getGlobbedFiles('./app/models/**/*.js').forEach(function (modelPath) {
-    	require(path.resolve(modelPath));
+      console.log(path.resolve(modelPath), 'MONGOOSEPATH')
+      require(path.resolve(modelPath));
     });
 
+    var Room = require('./app/models/rooms.server.model.js')
     // Setting application local variables
     //#DD: Removed Facebook client ID line here (unused strategy)
     app.locals.title = config.app.title;
@@ -180,7 +183,9 @@
 
     var Message = mongoose.model('Message', chatMessage);
 
-    var rooms = ['room1','room2','room3','room4'];
+    var usernames = {}
+
+    var rooms = ['lobby', 'room1', 'room2', 'room3', 'room4'];
 
     //#DD IO function to receiev events and relay them to users
     io.sockets.on('connection', function (socket) {
@@ -189,10 +194,45 @@
 
       //Start Justin Code
 
+      socket.on('pageLoad', function(username) {
+        console.log(username)
+        socket.username = username
+        socket.room = 'lobby'
+        usernames[username] = username
+        console.log(usernames, 'usernames')
+
+        socket.join('lobby')
+
+        io.sockets.in('lobby').emit('updatechat', rooms);
+      })
+
       socket.on('sendRooms', function(){
         io.emit('sendingRooms', ['room1','room2','room3','room4'])
-        console.log('sending rooms')
       })
+
+      socket.on('switchRoom', function(newroom){
+        socket.leave(socket.room);
+        socket.join(newroom);
+        console.log('YOU HAVE JOINED' + newroom)
+        // socket.emit('updatechat', console.log('YOU HAVE JOINED' + newroom));
+        // sent message to OLD room
+        // io.sockets.in(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
+        // update socket session room title
+        socket.room = newroom;
+        // io.sockets.in(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
+        // socket.emit('updaterooms', rooms, newroom);
+      });
+
+
+      socket.on('newRoom', function (roomname) {
+        console.log(roomname, 'before function');
+        Room.create(roomname, function (err, roomname) {
+          if (err) {
+            return console.error(err);
+          }
+          console.log('posting to roomnames', roomname);
+        });
+      });
       //End Justin Code
 
 
@@ -214,14 +254,16 @@
         });
 
         socket.on('getUsers', function () {
-        	Message.find(function (err, allMessages) {
-        		if (err) {
-        			return console.error(err)
-        		}
-        		console.log('finding all messages with GetUsers')
-        		io.emit('pastMessages', allMessages);
-        	});
+          Message.find(function (err, allMessages) {
+            if (err) {
+              return console.error(err)
+            }
+            console.log('finding all messages with GetUsers', allMessages)
+            io.emit('pastMessages', allMessages);
+          });
         });
+
+
 
 
         socket.on('newMessage', function (message) {

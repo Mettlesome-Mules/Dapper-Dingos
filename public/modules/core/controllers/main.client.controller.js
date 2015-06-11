@@ -5,15 +5,39 @@ angular.module('core')
 .controller('mainController', ['$scope', 'Menus', function($scope, Menus) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
+    $scope.chatrooms;
 
 		$scope.ytQuery = '';
     var socket = io.connect();
+
+    socket.emit('pageLoad', 'TestUser')
+
+    socket.on('updatechat', function(rooms) {
+      $scope.chatrooms = rooms
+    })
+
+    $scope.changeRoom = function(room) {
+      socket.emit('switchRoom', room)
+      var roomname = {
+        'admin': '',
+        'name': room
+      };
+      socket.emit('newRoom', roomname);      
+    };
+
+    $scope.sendMessage = function () {
+      
+      socket.emit('newMessage', chatMessage);
+      $scope.message = '';
+    };
+
     $scope.socketTest = function() {
       console.log('socketTest button pressed')
       socket.emit('sendRooms');
     };
     socket.on('sendingRooms', function(rooms) {
       $scope.rooms = rooms
+
     })
     //#DD input box function for taking the submitted string and parsing into a videoKey.
     $scope.ytSearcher = function(){

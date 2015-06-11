@@ -1,7 +1,7 @@
 'use strict';
 // #DD - added the url for our mongolab hosted database
 module.exports = {
-	db: 'mongodb://mettle:neighneigh@ds045242.mongolab.com:45242/socket2me',
+	db: 'localhost:27017',
 	app: {
 		title: 'Dapper-Dingos - Development Environment'
 	},
