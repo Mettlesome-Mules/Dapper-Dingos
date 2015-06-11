@@ -40,11 +40,6 @@ angular.module('core')
 			})
 		},
 
-		//#DD input box function for taking the submitted string and parsing into a videoKey.
-		$scope.ytSearcher = function(){
-
-    
-
     $scope.changeRoom = function(room) {
       socket.emit('switchRoom', room)
       var roomname = {
