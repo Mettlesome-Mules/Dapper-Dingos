@@ -11,7 +11,7 @@ angular.module('core')
 
 	$scope.searches = [];
 	$scope.ytQuery = '';
-	$scope.queuedVideos = ['title1', 'title2'];
+	$scope.queuedVideos = ['title1', 'title2', 'title3', 'title4', 'title5', 'title6', 'title7', 'title8', 'title9'];
 
 
 
@@ -26,6 +26,7 @@ angular.module('core')
 		console.log('main.client.controller.js: ADDTOQUEUE', video.snippet.title)
 		$scope.queuedVideos.push(video.snippet.title)
 		console.log($scope.queuedVideos)
+		$scope.$apply();
 	})
 	$scope.search = function() {
 		console.log('mainctrl searching')
