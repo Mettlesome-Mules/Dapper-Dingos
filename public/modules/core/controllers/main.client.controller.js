@@ -13,13 +13,10 @@ angular.module('core')
 	$scope.ytQuery = '';
 	$scope.queuedVideos = ['title1', 'title2', 'title3', 'title4', 'title5', 'title6', 'title7', 'title8', 'title9'];
 
-
-
 	var socket = io.connect();
-    socket.emit('pageLoad', 'TestUser')
+    socket.emit('sendRooms')
     socket.on('sendingRooms', function(rooms) {
-      $scope.rooms = rooms
-
+      $scope.rooms = rooms;
     })
 
     socket.on('addToQueue', function(video) {
