@@ -182,24 +182,33 @@
       //Start Rooms Code
       var Rooms =[];
 
-      Room.create({ name: 'lobby'}, function (err, data) {
-        if (err) {
-          return console.error(err);
+      Room.findOne({ name: 'lobby'}, function(err, data){
+        if (data === null){
+          Room.create({ name: 'lobby'}, function (err, data) {
+            if (err) {
+              return console.error(err);
+            }
+            socket.join('lobby');
+            socket.room = 'lobby'
+
+            io.sockets.in(socket.room).emit('pastMessages', data.messages)
+          });
+        }else{
+          console.log('Data:', data)
+          socket.join('lobby');
+          socket.room = 'lobby'
+
+          io.sockets.in(socket.room).emit('pastMessages', data.messages)
         }
-
-        socket.join('lobby');
-        socket.room = 'lobby'
-
-        io.sockets.in('lobby').emit('updatechat', Rooms);
-      });
-
-      socket.on('sendRooms', function(){
-        io.emit('sendingRooms', Rooms)
       })
+
       
       Room.find(function(err, data) {
-        console.log('Data:', data)
         Rooms = data
+      })
+
+      socket.on('sendRooms', function(){
+        io.emit('sendingRooms', Rooms, socket.room)
       })
 
       
@@ -214,16 +223,9 @@
           if(err){
             return err
           }
-          io.sockets.in(socket.room).emit('pastMessages', obj.messages)
+          io.sockets.in(socket.room).emit('pastMessages', obj.messages, socket.room)
         })
 
-
-        //make a call so that when messages are rendered
-
-
-
-        // io.sockets.in(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
-        // socket.emit('updaterooms', rooms, newroom);
       });
 
 
@@ -245,8 +247,10 @@
 
       socket.on('newRoom', function (room) {
         //FIND A WAY TO NOT ADD ON RECLICK
+        console.log(room, 'ROOM:')
         Room.find({ name: room.name }, function(err, data) {
-          if (data){
+          console.log(data, 'DATA:')
+          if (data.length === 0){
             Room.create({ name: room.name }, function (err, data) {
               if (err) {
                 console.log(err, 'ERROR:')
@@ -254,8 +258,9 @@
               }
               socket.leave(socket.room);
               socket.join(data.name);
-              socket.room = data.name
-              io.sockets.in(socket.room).emit('pastMessages', data.messages)
+              socket.room = data.name;
+              io.sockets.in(socket.room).emit('pastMessages', data.messages);
+
             });
           }else {
             console.log('Already in db')
@@ -267,14 +272,14 @@
 
       //Messages Start
 
-      socket.on('onload', function () {
-        Room.find({name: socket.room} , function (err, allMessages) {
-          if (err) {
-            return console.error(err)
-          }
-          io.emit('pastMessages', allMessages);
-        });
-      });
+      // socket.on('onload', function () {
+      //   Room.find({name: socket.room} , function (err, allMessages) {
+      //     if (err) {
+      //       return console.error(err)
+      //     }
+      //     io.emit('pastMessages', allMessages);
+      //   });
+      // });
 
 
       socket.on('newMessage', function (message) {
@@ -316,31 +321,19 @@
         //socket function for starting video #DD
         socket.on('initiate', function (data) {
           console.log('relaying player start')
-          io.emit('startVid');
+          io.sockets.in(socket.room).emit('startVid');
         });
 
         //socket function for pausing #DD
         socket.on('paused', function (data) {
           console.log('relaying pause')
-          io.emit('pauseVid');
+          io.sockets.in(socket.room).emit('pauseVid');
         });
         //socket function for changing video #DD
         socket.on('changingUrl', function (url, error) {
           console.log('relaying new Url')
-          io.emit('changeVid', url);
+          io.sockets.in(socket.room).emit('changeVid', url);
         });
-
-
-        socket.on('getUsers', function () {
-          Message.find(function (err, allMessages) {
-            if (err) {
-              return console.error(err)
-            }
-            console.log('finding all messages with GetUsers', allMessages)
-            io.emit('pastMessages', allMessages);
-          });
-        });
-
 
       });
     // Return Express server instance

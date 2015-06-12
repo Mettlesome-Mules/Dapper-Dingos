@@ -7,7 +7,6 @@ angular.module('core')
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
-		$scope.roomname;
 		$scope.rooms;
 		$scope.room_search;
 		$scope.video_search_text = '';
@@ -17,10 +16,13 @@ angular.module('core')
 			console.log('CLEAR SEARCH',e)
 			$scope.video_search = "";
 			$scope.video_results = "";
-
 		}
+		socket.emit('sendRooms')
+		socket.on('sendingRooms', function(rooms) {
+		  $scope.rooms = rooms
+		})
 
-	socket.on('updatechat', function(rooms) {
+		socket.on('updateRooms', function(rooms) {
       $scope.rooms = rooms
     })
 
@@ -30,7 +32,7 @@ angular.module('core')
 		  var room = {
 		    'admin': '',
 		    'name': roomname
-		  };      
+		  };
 		};
 
 		$scope.createRoom = function(roomname) {

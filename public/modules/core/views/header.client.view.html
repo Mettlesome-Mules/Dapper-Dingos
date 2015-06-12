@@ -1,6 +1,6 @@
 <div class="container navbar-header" data-ng-controller="HeaderController">
  	<nav class="navbar-collapse" role="navigation">
-<!-- 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
+		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
 			<li ui-route="/signup" ng-class="{active: $uiRoute}">
 				<a href="/#!/signup">Sign Up</a>
 			</li>
@@ -8,7 +8,7 @@
 			<li ui-route="/signin" ng-class="{active: $uiRoute}">
 				<a href="/#!/signin">Sign In</a>
 			</li>
-		</ul> -->
+		</ul>
 
 		<ul class="nav nav-stacked" data-ng-show="authentication.user">
 			<li class="dropdown row-sm-4" dropdown>
@@ -23,18 +23,10 @@
 			</li>
 			<li class="dropdown row-sm-4" dropdown>
 				<a href="#" class="dropdown-toggle glyphicon glyphicon-film" data-toggle="dropdown" dropdown-toggle></a>
-				<ul class='dropdown-menu video-search-ul' >
-					<input placeholder="Search for video..." type="text" name="" id="" ng-model='video_search_text' ng-click="$event.stopPropagation()" ng-change='searchYouTube()' ng-blur='clearSearch($event)'>
-					<li data-ng-repeat="video in video_search_results">
-						<div class="video-result" ng-click="urlEmit(video)">
-							<p class="video-result-title" >{{ video.snippet.title }}</p>
-							<div class="video-image-div">
-								<div class="queue-glyph glyphicon glyphicon-plus"></div>
-								<img src='{{video.snippet.thumbnails.default.url}}' ></img>
-							</div>
-<!-- 							<span class="queue-glyph glyphicon glyphicon-play" style="color:lime" ></span> -->
-
-						</div>
+				<ul class='dropdown-menu' >
+					<input placeholder="Search for video..." type="text" name="" id="" ng-model='video_search' ng-click="$event.stopPropagation()" ng-change='searchYouTube()' ng-blur='clearSearch($event)'>
+					<li data-ng-repeat="id in video_search">
+						<a>{{ id }}</a>
 					</li>
 				</ul>
 			</li>
