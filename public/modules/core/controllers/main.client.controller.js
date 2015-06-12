@@ -22,48 +22,6 @@ angular.module('core')
 
     })
 
-	socket.on('addToQueue', function(video) {
-		console.log('main.client.controller.js: ADDTOQUEUE', video.snippet.title)
-		$scope.queuedVideos.push(video.snippet.title)
-		console.log($scope.queuedVideos)
-		$scope.$apply();
-	})
-	$scope.search = function() {
-		console.log('mainctrl searching')
-		$http({
-			method: 'GET',
-			url: 'https://www.googleapis.com/youtube/v3/search',
-			params: {
-				key: 'AIzaSyBU7VNaj493eV7o9dEu06kWLvQuxU4usrs',
-				type: 'video',
-				maxResults: '10',
-				part:'id, snippet',
-				fields: 'items/id,items/snippet/title,items/snippet/description,items/snippet/thumbnails/default,items/snippet/channelTitle',
-				q: this.query
-
-			}
-		})
-		.success(function(data) {
-			console.log('mainctrl', data.items[0].id.videoId);
-			$scope.searches = data.items;
-			console.log('mainctrl.succes', $scope.searches)
-			// var socket = io.connect();
-
-			// socket.emit('changingUrl', data.video_id)
-		})
-		.error(function () {
-			console.log('err')
-		})
-	},
-
-    $scope.changeRoom = function(room) {
-      socket.emit('switchRoom', room)
-      var roomname = {
-        'admin': '',
-        'name': room
-      };
-      socket.emit('newRoom', roomname);      
-    };
 
     $scope.sendMessage = function () {
       
@@ -71,33 +29,7 @@ angular.module('core')
       $scope.message = '';
     };
 
-    $scope.socketTest = function() {
-      console.log('socketTest button pressed')
-      socket.emit('sendRooms');
-    };
-
-
-
-	
-
     //#DD input box function for taking the submitted string and parsing into a videoKey.
-    $scope.ytSearcher = function(){
-
-      var video_id = $scope.ytQuery.split('v=')[1];
-      console.log(video_id, $scope.ytQuery)
-        if(video_id.indexOf('&') !== -1) {
-        var ampersandPosition = video_id.indexOf('&');
-          video_id = video_id.substring(0, ampersandPosition);
-        } else {
-          video_id = video_id.substring(0, video_id.length);
-        }
-        console.log(video_id)
-        
-        var socket = io.connect();
-        // #DD triggers url change via sockets, sends videoID as data
-        console.log(video_id)
-				socket.emit('changingUrl', video_id)
-		}
 
 	}])
 
@@ -180,7 +112,6 @@ angular.module('core')
 
 	      // #DD socket trigger for changing URL
 				socket.on('changeVid', function(urlKey){
-					console.log('changing video Url', urlKey)
 					// #DDyoutube API function for cueing new video
 					player.cueVideoByUrl({ mediaContentUrl: 'http://www.youtube.com/v/' + urlKey + '?version=5'})
 					console.log('loading new Url')

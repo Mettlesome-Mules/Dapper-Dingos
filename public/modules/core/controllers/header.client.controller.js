@@ -7,6 +7,7 @@ angular.module('core')
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
+		$scope.roomname;
 		$scope.rooms;
 		$scope.room_search;
 		$scope.video_search_text = '';
@@ -29,8 +30,7 @@ angular.module('core')
 		  var room = {
 		    'admin': '',
 		    'name': roomname
-		  };
-		  socket.emit('newRoom', room);      
+		  };      
 		};
 
 		$scope.createRoom = function(roomname) {
@@ -100,9 +100,5 @@ angular.module('core')
 		$scope.$on('$stateChangeSuccess', function() {
 			$scope.isCollapsed = false;
 		});
-		$scope.queue = function() {
-			
-		}
-
 	}
 ]);
