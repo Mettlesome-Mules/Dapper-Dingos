@@ -1,10 +1,21 @@
-<section data-ng-controller="HomeController">
+<section class="home-container" data-ng-controller="HomeController">
 	<div class="jumbotron-center text-center" data-ng-hide="authentication.user">
-		<img src="/modules/core/img/brand/lounger_logo.png"></img>
-	</div>
-		<div class='homebtn'><a class="btn" data-ng-hide="authentication.user" href="/#!/signin">SignUp/Login</a></div>
+
+		<img src="/modules/core/img/brand/lounger_logo.png">
+		</img>
+
+		<div class='homebtn'>
+			<a class="btn" data-ng-hide="authentication.user" href="/#!/signin">SignUp/Login</a>
+		</div>
+		<div class='about'>
+			<p class='about-p'>We love sharing and <b style='color:#888'>discover</b>ing music and videos with people from around the world. We believe that <b style='color:#888'>listen</b>ing to music and <b style='color:#888'>watch</b>ing videos chosen by real people - just like you - creates a far more interesting journey. That is why we created lounger.
+			<p class='about-p'
+			We are a small team of Technologists, musicians, nerds, DJs and designers, who are equally as passionate about our community as we are about music and videos.
+			</p>
+		</div>
 	</div>
 	<div class='btnCtn'>
 			<div class='homebtn'><a class='btn' data-ng-show="authentication.user" href="/#!/main">JOIN YOUR FRIENDS!</a></div>
 	</div>
+	<div data-ng-hide="authentication.user"></div>
 </section>
