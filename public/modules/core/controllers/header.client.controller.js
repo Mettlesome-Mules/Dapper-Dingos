@@ -4,21 +4,22 @@
 
 angular.module('core')
 .controller('HeaderController', ['$scope', '$http', 'Authentication', 'Menus', function($scope, $http, Authentication, Menus) {
-		$scope.authentication = Authentication;
-		$scope.isCollapsed = false;
-		$scope.menu = Menus.getMenu('topbar');
-		$scope.roomname;
-		$scope.rooms;
-		$scope.room_search;
-		$scope.video_search_text = '';
-		$scope.video_search_results = [];
-		$scope.video_search_focus = false;
-		$scope.clearSearch = function(e){
-			console.log('CLEAR SEARCH',e)
-			$scope.video_search = "";
-			$scope.video_results = "";
+	$scope.authentication = Authentication;
+	$scope.isCollapsed = false;
+	$scope.menu = Menus.getMenu('topbar');
+	$scope.currentRoom;
+	$scope.roomname;
+	$scope.rooms;
+	$scope.room_search;
+	$scope.video_search_text = '';
+	$scope.video_search_results = [];
+	$scope.video_search_focus = false;
+	$scope.clearSearch = function(e){
+		console.log('CLEAR SEARCH',e)
+		$scope.video_search = "";
+		$scope.video_results = "";
 
-		}
+	}
 	socket.emit('sendRooms')
 	socket.on('sendingRooms', function(rooms) {
       $scope.rooms = rooms
@@ -29,6 +30,17 @@ angular.module('core')
 		console.log('header.client.controller.js: $scope.changeRoom: roomname',roomname)
 		// emits pastMessages
 		console.log('header.client.controller.js: $scope.changeRoom: socket.emit("changeRoom")',roomname)
+		$scope.roomname = roomname
+
+		console.log('WE NEED TO UPDATE THE VIDEO SOME HOW!???',$scope.rooms)
+		for(var i = 0;i < $scope.rooms.length;i++){
+			if ($scope.rooms[i].name === roomname){
+				$scope.currentRoom = $scope.rooms[i]
+			}
+		}
+		console.log('CURRENT ROOMM IS HERE NOW CHANGE THE VIDEO ALREADY', $scope.currentRoom)
+		socket.emit('changingUrl', $scope.currentRoom.queue[0].id.videoId)
+
 
 		var room = {
 		'admin': 'guest',
@@ -40,6 +52,7 @@ angular.module('core')
 
 	$scope.createRoom = function(roomname) {
 		console.log('header.client: createRoom():',roomname)
+		$scope.roomname = roomname
 		// socket.emit('newRoom', roomname)
 		var room = {
 		  'admin': 'guest',
@@ -100,7 +113,7 @@ angular.module('core')
 			var socket = io.connect();
 			socket.emit('changingUrl', video.id.videoId)
 			console.log('AFTER CHANGED VIDEO URL')
-			socket.emit('addToQueue', video, 'RoomNameHere')
+			socket.emit('addToQueue', video, $scope.roomname)
 			console.log('AFTER ADDTOQUEUE')
 		}
 		// Collapsing the menu after navigation
