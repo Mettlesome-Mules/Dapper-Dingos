@@ -7,6 +7,7 @@ angular.module('core')
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
+		$scope.roomname;
 		$scope.rooms;
 		$scope.room_search;
 		$scope.video_search_text = '';
@@ -29,8 +30,7 @@ angular.module('core')
 		  var room = {
 		    'admin': '',
 		    'name': roomname
-		  };
-		  socket.emit('newRoom', room);      
+		  };      
 		};
 
 		$scope.createRoom = function(roomname) {
@@ -89,6 +89,7 @@ angular.module('core')
 			})
 		},
 		$scope.urlEmit = function(video) {
+			console.log(video.id.videoId)
 			console.log('urlEmit', video.id.videoId)
 			var socket = io.connect();
 			socket.emit('changingUrl', video.id.videoId)
@@ -100,9 +101,5 @@ angular.module('core')
 		$scope.$on('$stateChangeSuccess', function() {
 			$scope.isCollapsed = false;
 		});
-		$scope.queue = function() {
-			
-		}
-
 	}
 ]);

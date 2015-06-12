@@ -50,13 +50,14 @@ angular.module('core')
 
     //#DD using the local authentication as a condition, send a message to the server
   $scope.sendMessage = function () {
-  	console.log("Send message event triggered");
-  	var chatMessage = {
-  		'username': $scope.userName.displayName,
-  		'message': $scope.message
-  	};
+
+    var chatMessage = {
+      'username': $scope.userName.displayName,
+      'message': $scope.message
+    };
+  	console.log("Send message event triggered", chatMessage);
   	socket.emit('newMessage', chatMessage);
   	$scope.message = '';
   };
-  socket.emit('getUsers');
+  socket.emit('onload');
 }]);
