@@ -20,11 +20,11 @@ angular.module('core')
 
 		}
 
-		socket.on('updatechat', function(rooms) {
+	socket.on('updatechat', function(rooms) {
       $scope.rooms = rooms
     })
 
-		$scope.changeRoom = function(roomname) {
+	$scope.changeRoom = function(roomname) {
       console.log(roomname, '<-CHANGING TO')
 		  socket.emit('changeRoom', roomname)
 		  var room = {
