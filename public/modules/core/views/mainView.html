@@ -41,11 +41,11 @@
                 </div>
             </div>
             <div class="queue-container">
-                <div class='queued-video'  ng-repeat="video in queuedVideos">
+                <div class='queued-video'  ng-repeat="video in queuedVideos track by $index">
                     <div>
                         {{ video }}
-                        <a class='vote-glyph glyphicon glyphicon-leaf' style='color: chartreuse;'> </a>
-                        <a class='vote-glyph glyphicon glyphicon-fire' style='color: orange;'> </a>
+                        <a class='vote-glyph glyphicon glyphicon-leaf' ng-click="upVote(video, $index)" style='color: chartreuse;'> </a>
+                        <a class='vote-glyph glyphicon glyphicon-fire' ng-click="downVote(video, $index)" style='color: orange;'> </a>
                     </div>
                 </div>
             </div>

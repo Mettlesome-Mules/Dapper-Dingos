@@ -28,11 +28,24 @@ angular.module('core')
       console.log($scope.queuedVideos)
       $scope.$apply();
     })
+
     $scope.sendMessage = function () {
       
       socket.emit('newMessage', chatMessage);
       $scope.message = '';
     };
+    $scope.upVote = function (video, $index){
+    	if($index > 0){
+			var tmp = $scope.queuedVideos[$index];
+			$scope.queuedVideos[$index] = $scope.queuedVideos[$index - 1];
+			$scope.queuedVideos[$index - 1] = tmp;
+		}
+    }
+    $scope.downVote = function(video, $index){
+		    var tmp = $scope.queuedVideos[$index];
+		    $scope.queuedVideos[$index] = $scope.queuedVideos[$index + 1];
+		    $scope.queuedVideos[$index + 1] = tmp;
+    }
 
 
 
@@ -53,7 +66,9 @@ angular.module('core')
 				window.hold = true;
 				console.log('Youtube object: ' + JSON.stringify(window.j))
 				console.log(event)
+				console.log(event.data)
 				socket.emit('initiate', console.log('sending that its time to play!'));	
+				socket.emit('fastForward')
 			}
 
 	//If Player is paused #DD
@@ -63,6 +78,8 @@ angular.module('core')
 				socket.emit('paused', console.log('sending that video has been paused!'));
 				}
 			},
+	//If Player is Fast Forwarded
+		
 
 			onPlayerReady: function(event){
 		   	console.log('player ready')
@@ -110,19 +127,13 @@ angular.module('core')
     			console.log('stopping video')
  				});
 
-	      // #DD socket trigger for Changing Videotime
- 				socket.on('changeTime', function(newTime){
- 					console.log('changingTime');
- 					player.seekTo({seconds:newTime, allowSeekAhead:true})
- 					window.hold = false;
- 				})
-
 	      // #DD socket trigger for changing URL
 				socket.on('changeVid', function(urlKey){
 					// #DDyoutube API function for cueing new video
 					player.cueVideoByUrl({ mediaContentUrl: 'http://www.youtube.com/v/' + urlKey + '?version=5'})
 					console.log('loading new Url')
 				})
+
 
 	      $window.onYouTubeIframeAPIReady = function() {
 	        player = new YT.Player(element.children()[0], {

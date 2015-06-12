@@ -20,7 +20,7 @@ angular.module('core')
 
 		}
 
-		socket.on('updatechat', function(rooms) {
+	socket.on('updatechat', function(rooms) {
       $scope.rooms = rooms
     })
 
@@ -42,30 +42,10 @@ angular.module('core')
 			};
 			socket.emit('newRoom', room);   
 		}
-		// $scope.searchYouTube = function(e){
-		// 	console.log($scope.video_search)
-		// 	// If youtube exists in the string then emit event
-		// 	if ($scope.video_search.indexOf("youtube") > -1){
-		// 		var video_id = $scope.video_search.split('v=')[1];
-		// 		console.log(video_id, $scope.video_search)
-		// 			if(video_id.indexOf('&') !== -1) {
-		// 			var ampersandPosition = video_id.indexOf('&');
-		// 			  video_id = video_id.substring(0, ampersandPosition);
-		// 			} else {
-		// 			  video_id = video_id.substring(0, video_id.length);
-		// 			}
-					
-		// 			var socket = io.connect();
-		// 			// #DD triggers url change via sockets, sends videoID as data
-		// 			socket.emit('changingUrl', video_id)
-		// 	}
-		// 	$scope.video_results = ['abc','123','456']
-		// }
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
 		};
 		$scope.searchYouTube = function() {
-			console.log('mainctrl searching')
 			$http({
 				method: 'GET',
 				url: 'https://www.googleapis.com/youtube/v3/search',
@@ -80,6 +60,7 @@ angular.module('core')
 				}
 			})
 			.success(function(data) {
+				console.log('fullVideo',data)
 				console.log('mainctrl', data.items[0].id.videoId);
 				$scope.video_search_results = data.items;
 				console.log('mainctrl.succes', $scope.video_search_results)
@@ -89,13 +70,12 @@ angular.module('core')
 			})
 		},
 		$scope.urlEmit = function(video) {
-			console.log(video.id.videoId)
-			console.log('urlEmit', video.id.videoId)
+
 			var socket = io.connect();
 			socket.emit('changingUrl', video.id.videoId)
-			console.log('AFTER CHANGED VIDEO URL')
+			// console.log('AFTER CHANGED VIDEO URL')
 			socket.emit('addToQueue', video, 'RoomNameHere')
-			console.log('AFTER ADDTOQUEUE')
+			// console.log('AFTER ADDTOQUEUE')
 		}
 		// Collapsing the menu after navigation
 		$scope.$on('$stateChangeSuccess', function() {

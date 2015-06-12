@@ -226,10 +226,8 @@
         // socket.emit('updaterooms', rooms, newroom);
       });
 
-
+        // add to queue socket. Adds clicked search videos to queue #MM
         socket.on('addToQueue', function (video, roomName, error) {
-            console.log('config: express.js: addToQueue', video, roomName)
-            console.log('sdh3e5rhscgssdDGSRGSGWERGWERGGGGGGGGGGGGGGGGGGGGGGGGGGG', video, roomName)
             Room.find({name: roomName}, function(error, rooms){
                     console.log('config-express.js', rooms)
                 if(rooms.length){
@@ -329,6 +327,13 @@
           console.log('relaying new Url')
           io.emit('changeVid', url);
         });
+
+        //Steven socket function for fastForward
+        socket.on('fastForward', function (data) {
+            console.log('relaying fastForward')
+            io.emit('changeTime');
+        })
+
 
 
         socket.on('getUsers', function () {
