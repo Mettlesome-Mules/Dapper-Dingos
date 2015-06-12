@@ -2,16 +2,22 @@
 
 angular.module('core')
 
-.controller('mainController', ['$scope', '$http', 'Menus', function($scope, $http, Menus) {
+.controller('mainController', ['$scope', '$http', 'Menus', function($scope, $http, Menus, Authentication) {
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
-    $scope.chatrooms;
+    $scope.user = window.user.displayName
 
 		$scope.searches = [];
 		$scope.ytQuery = '';
     var socket = io.connect();
 
-    socket.emit('pageLoad', 'TestUser')
+    $scope.loaded = false;
+
+    if(!$scope.loaded){
+      socket.emit('pageLoad', $scope.user)
+      $scope.loaded = true;
+    }
+
 		$scope.search = function() {
 			console.log('mainctrl searching')
 			$http({
@@ -40,29 +46,12 @@ angular.module('core')
 			})
 		},
 
-    $scope.changeRoom = function(room) {
-      socket.emit('switchRoom', room)
-      var roomname = {
-        'admin': '',
-        'name': room
-      };
-      socket.emit('newRoom', roomname);      
-    };
-
     $scope.sendMessage = function () {
       
       socket.emit('newMessage', chatMessage);
       $scope.message = '';
     };
 
-    $scope.socketTest = function() {
-      console.log('socketTest button pressed')
-      socket.emit('sendRooms');
-    };
-    socket.on('sendingRooms', function(rooms) {
-      $scope.rooms = rooms
-
-    })
     //#DD input box function for taking the submitted string and parsing into a videoKey.
     $scope.ytSearcher = function(){
 
