@@ -182,16 +182,26 @@
       //Start Rooms Code
       var Rooms =[];
 
-      Room.create({ name: 'lobby'}, function (err, data) {
-        if (err) {
-          return console.error(err);
-        }
+      Room.findOne({ name: 'lobby'}, function(err, data){
+       console.log('data', data)
+       if (data === null){
+         Room.create({ name: 'lobby'}, function (err, data) {
+           if (err) {
+             return console.error(err);
+           }
+           socket.join('lobby');
+           socket.room = 'lobby'
 
-        socket.join('lobby');
-        socket.room = 'lobby'
+           io.sockets.in(socket.room).emit('pastMessages', data.messages)
+         });
+       }else{
+         console.log('Data:', data)
+         socket.join('lobby');
+         socket.room = 'lobby'
 
-        io.sockets.in('lobby').emit('updatechat', Rooms);
-      });
+         io.sockets.in(socket.room).emit('pastMessages', data.messages)
+       }
+     })
 
       socket.on('sendRooms', function(){
         io.emit('sendingRooms', Rooms)

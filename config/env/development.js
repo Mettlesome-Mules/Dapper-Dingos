@@ -1,7 +1,7 @@
 'use strict';
 // #DD - added the url for our mongolab hosted database
 module.exports = {
-	//db: 'localhost:27017/socket4me',
+	//db: 'localhost:27017/socket5me',
 	db: 'mongodb://mettle:neighneigh@ds033617.mongolab.com:33617/lounger',
 	app: {
 		title: 'Lounger'
