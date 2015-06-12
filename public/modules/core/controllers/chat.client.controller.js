@@ -59,5 +59,5 @@ angular.module('core')
   	socket.emit('newMessage', chatMessage);
   	$scope.message = '';
   };
-  socket.emit('onload');
+  // socket.emit('onload');
 }]);
