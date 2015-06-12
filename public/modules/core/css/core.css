@@ -50,6 +50,12 @@ header {
 	}
 }
 
+@media(max-width:975px){
+	.chatContainer {
+		display: none;
+	}
+}
+
 /*
 @media screen and (min-width: 768px) {
     .navbar-header{
@@ -99,11 +105,22 @@ header {
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
+
+
 .btn{
-	background-color: #FFF;
+	background-color: #DDD;
 }
+.btn-primary {
+	background-color: #DDD;
+}
+.btn{
+	background-color: #DDD;
+}
+
+
 .jumbotron{
 	opacity: 0.8;
+	background-color: #96D5FF;
 	margin: 50px;
 	padding: 20px;
 }
@@ -113,6 +130,7 @@ header {
 }
 
 .homebtn{
+	color: #000;
 	text-align: center;
 	width: 100%;
 	left: 50%;
@@ -171,6 +189,7 @@ header {
 	height:20%;
 	width: 20em;
 	bottom:0px;
+	border: #AAA 1px solid;
 	position: absolute;
 	overflow-y: scroll;
 }
@@ -206,7 +225,15 @@ header {
 	height:100%;
 	left:0px;
 }
-
+/*.video-result {
+	color: #999;
+}
+.video-result:hover {
+	background-color: #DDD;
+}*/
+.video-search-ul {
+	overflow-y: scroll;
+}
 button.chat-submit-button{
 	position:absolute;
 	height:100%;
@@ -224,10 +251,29 @@ button.chat-submit-button{
 }*/
 
 .vote-glyph {
-	font-size: 13px
+	font-size: 13px;
 }
 
 .vote-glyph:hover {
 	font-size: 14px;
-	background-color: #EEE;
+	background-color: #777;
+
+}
+
+.video-image-div:hover {
+	opacity: .6;
+}
+
+.queue-glyph {
+	color: red;
+	font-size: 15px;
+	position:relative;
+	right: 50%;
+}
+
+.queue-glyph:hover {
+	z-index:2;
+	display: visible;
+	font-size: 18px;
+	background-color: yellow;
 }
