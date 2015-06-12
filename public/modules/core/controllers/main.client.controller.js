@@ -11,13 +11,6 @@ angular.module('core')
 		$scope.ytQuery = '';
     var socket = io.connect();
 
-    $scope.loaded = false;
-
-    if(!$scope.loaded){
-      socket.emit('pageLoad', $scope.user)
-      $scope.loaded = true;
-    }
-
 		$scope.search = function() {
 			console.log('mainctrl searching')
 			$http({
