@@ -22,12 +22,19 @@ angular.module('core')
 
     })
 
-
+    socket.on('addToQueue', function(video) {
+      console.log('main.client.controller.js: ADDTOQUEUE', video.snippet.title)
+      $scope.queuedVideos.push(video.snippet.title)
+      console.log($scope.queuedVideos)
+      $scope.$apply();
+    })
     $scope.sendMessage = function () {
       
       socket.emit('newMessage', chatMessage);
       $scope.message = '';
     };
+
+
 
     //#DD input box function for taking the submitted string and parsing into a videoKey.
 

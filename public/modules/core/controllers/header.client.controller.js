@@ -89,6 +89,7 @@ angular.module('core')
 			})
 		},
 		$scope.urlEmit = function(video) {
+			console.log(video.id.videoId)
 			console.log('urlEmit', video.id.videoId)
 			var socket = io.connect();
 			socket.emit('changingUrl', video.id.videoId)
