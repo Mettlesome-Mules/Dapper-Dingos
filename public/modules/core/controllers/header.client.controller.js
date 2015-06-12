@@ -19,29 +19,35 @@ angular.module('core')
 			$scope.video_results = "";
 
 		}
-
-	socket.on('updatechat', function(rooms) {
+	socket.emit('sendRooms')
+	socket.on('sendingRooms', function(rooms) {
       $scope.rooms = rooms
+      console.log('header.client.controller.js: socket.on.sendingRooms: rooms', rooms)
     })
 
 	$scope.changeRoom = function(roomname) {
-      console.log(roomname, '<-CHANGING TO')
-		  socket.emit('changeRoom', roomname)
-		  var room = {
-		    'admin': '',
-		    'name': roomname
-		  };      
-		};
+		console.log('header.client.controller.js: $scope.changeRoom: roomname',roomname)
+		// emits pastMessages
+		console.log('header.client.controller.js: $scope.changeRoom: socket.emit("changeRoom")',roomname)
 
-		$scope.createRoom = function(roomname) {
-			console.log(roomname)
-			socket.emit('switchRoom', roomname)
-			var room = {
-			  'admin': '',
-			  'name': roomname
-			};
-			socket.emit('newRoom', room);   
-		}
+		var room = {
+		'admin': 'guest',
+		'name': roomname
+		};
+		socket.emit('changeRoom', room)
+
+	};
+
+	$scope.createRoom = function(roomname) {
+		console.log('header.client: createRoom():',roomname)
+		// socket.emit('newRoom', roomname)
+		var room = {
+		  'admin': 'guest',
+		  'name': roomname
+		};
+		console.log('header.client: createRoom():Emit newRoom: room', room)
+		socket.emit('newRoom', room);
+	}
 		// $scope.searchYouTube = function(e){
 		// 	console.log($scope.video_search)
 		// 	// If youtube exists in the string then emit event

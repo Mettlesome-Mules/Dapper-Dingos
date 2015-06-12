@@ -36,28 +36,30 @@ angular.module('core')
 	$scope.message = '';
 	$scope.filterText = '';
 	$scope.messages = [];
-
+	$scope.roomname = '';
 	var socket = io.connect();
 
     // #DD load previous messages from chat
-  socket.on('pastMessages', function (data) {
-  	console.log(data, 'past');
-  	$scope.messages = data.reverse();
-  	$scope.$apply();
+  socket.on('pastMessages', function (pastMessages) {
+  	console.log('chat.client.controller.js: socket.on("pastMessages": arguments"', pastMessages);
+  	$scope.messages = pastMessages.reverse()
+    $scope.$apply();
   });
-
 
 
     //#DD using the local authentication as a condition, send a message to the server
   $scope.sendMessage = function () {
-
     var chatMessage = {
       'username': $scope.userName.displayName,
       'message': $scope.message
     };
-  	console.log("Send message event triggered", chatMessage);
+  	$scope.messages.unshift(chatMessage)
+  	console.log("chat.client.controller.js: $scope.sendMessage: Send message event triggered", chatMessage);
+
   	socket.emit('newMessage', chatMessage);
+
+  	console.log("chat.client.controller.js: Emit newMessageevent")
   	$scope.message = '';
   };
-  socket.emit('onload');
+  // socket.emit('onload');
 }]);

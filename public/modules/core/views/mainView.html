@@ -28,6 +28,7 @@
         <div class="right-sidecontainer">
             <div class="chatContainer" ng-controller='chatController'>
                 <div class="chat-history" >
+                    {{ roomname }}
                     <div class='chat'>
                             <div id="chats" ng-repeat='text in messages'>
                                 <div>{{text.username}}</div>
