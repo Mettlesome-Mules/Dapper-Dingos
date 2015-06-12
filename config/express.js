@@ -232,7 +232,16 @@
         socket.on('addToQueue', function (video, roomName, error) {
             console.log('config: express.js: addToQueue', video, roomName)
             console.log('sdh3e5rhscgssdDGSRGSGWERGWERGGGGGGGGGGGGGGGGGGGGGGGGGGG', video, roomName)
-
+            Room.find({name: roomName}, function(error, rooms){
+                    console.log('config-express.js', rooms)
+                if(rooms.length){
+                    delete video.$$hashKey;
+                    rooms[0].queue.push(video)
+                    rooms[0].save(function(error){
+                        console.log(arguments)
+                    })
+                }
+            })
             io.emit('addToQueue', video);
         });
 
