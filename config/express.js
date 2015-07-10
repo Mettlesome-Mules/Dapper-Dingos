@@ -181,6 +181,7 @@
       var Room = mongoose.model('Room')
       //Start Rooms Code
       var Rooms =[];
+<<<<<<< HEAD
 
       Room.findOne({ name: 'lobby'}, function(err, data){
        console.log('data', data)
@@ -203,72 +204,118 @@
        }
      })
 
+||||||| merged common ancestors
+
+      Room.create({ name: 'lobby'}, function (err, data) {
+        if (err) {
+          return console.error(err);
+        }
+
+        socket.join('lobby');
+        socket.room = 'lobby'
+
+        io.sockets.in('lobby').emit('updatechat', Rooms);
+      });
+
+=======
+>>>>>>> d522e5be43327d27fe80ba3b896f4d365fd65477
       socket.on('sendRooms', function(){
         io.emit('sendingRooms', Rooms)
       })
       
-      Room.find(function(err, data) {
-        console.log('Data:', data)
-        Rooms = data
+      Room.find(function(err, rooms) {
+        console.log('CONFIG/EXPRESS.JS: io.sockets.on("connection"...): getting ROOOMS', rooms)
+        Rooms = rooms
       })
+
+      Room.findOne({ name: 'lobby'}, function (err, room) {
+        console.log('CONFIG/EXPRESS.JS: io.sockets.on("connection"...) : BEFORE data', room)
+        if (room === null){
+        console.log('CONFIG/EXPRESS.JS: io.sockets.on("connection"...) : CONFIG/EXPRESS.JS: after room === null', room)
+        // create the "lobby" if it doesn't exist
+       Room.create({ name: 'lobby'}, function (err, newRoom) {
+         if (err) {console.error('CONFIG/EXPRESS.JS: io.sockets.on("connection"...): Room.create(...):',err);}
+         socket.join('lobby');
+         socket.room = 'lobby'
+         io.sockets.in(socket.room).emit('pastMessages', newRoom.messages)
+       });
+       }else{
+         console.log('CONFIG/EXPRESS.JS: io.sockets.on("connection"...): room', room)
+         socket.join('lobby');
+         socket.room = 'lobby'
+         console.log('MESSAGES: ', room.messages)
+         io.sockets.in(socket.room).emit('pastMessages', room.messages)
+       }  
+      })
+
 
       
 
       socket.on('changeRoom', function(newroom){
         socket.leave(socket.room);
-        socket.join(newroom);
-        console.log('YOU HAVE JOINED ' + newroom)
-        socket.room = newroom;
-
-        Room.findOne({name: socket.room}, function(err,obj){          
-          if(err){
-            return err
+        socket.join(newroom.name);
+        console.log('CONFIG/EXPRESS.JS: socket.on("changeRoom"...) : YOU HAVE JOINED ' + newroom.name)
+        socket.room = newroom.name;
+        // pass messages back
+        Room.findOne({name: socket.room}, function(err,room){          
+          if(err){console.log('CONFIG/EXPRESS.JS: socket.on("changeRoom"...): ERROR:', err)}
+          if (room === null) 
+          {
+            Room.create({"name": socket.room}, function(err, newRoom){
+              if (err){console.log('CONFIG/EXPRESS.js: socket.on("changeroom"..)room.create(...)', err)}
+              io.sockets.in(socket.room).emit('pastMessages', newRoom.messages)
+            })
+          } 
+          else 
+          {
+            if (room.messages)
+            {
+              console.log('CONFIG/EXPRESS.JS: socket.on("changeRoom"...): Passing Messages back to client', room.messages)
+              io.sockets.in(socket.room).emit('pastMessages', room.messages)
+            } 
+            else 
+            {
+              io.sockets.in(socket.room).emit('pastMessages', [])
+            }
           }
-          io.sockets.in(socket.room).emit('pastMessages', obj.messages)
         })
-
-
-        //make a call so that when messages are rendered
-
-
-
-        // io.sockets.in(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
-        // socket.emit('updaterooms', rooms, newroom);
       });
 
 
-        socket.on('addToQueue', function (video, roomName, error) {
-            console.log('config: express.js: addToQueue', video, roomName)
-            console.log('sdh3e5rhscgssdDGSRGSGWERGWERGGGGGGGGGGGGGGGGGGGGGGGGGGG', video, roomName)
-            Room.find({name: roomName}, function(error, rooms){
-                    console.log('config-express.js', rooms)
-                if(rooms.length){
-                    delete video.$$hashKey;
-                    rooms[0].queue.push(video)
-                    rooms[0].save(function(error){
-                        console.log(arguments)
-                    })
-                }
-            })
-            io.emit('addToQueue', video);
-        });
+      socket.on('addToQueue', function (video, roomName, error) {
+        console.log('config: express.js: addToQueue', video, roomName)
+        console.log('sdh3e5rhscgssdDGSRGSGWERGWERGGGGGGGGGGGGGGGGGGGGGGGGGGG', video, roomName)
+        Room.find({name: roomName}, function(error, rooms){
+                console.log('config-express.js', rooms)
+            if(rooms.length)
+            {
+              delete video.$$hashKey;
+              rooms[0].queue.push(video)
+              rooms[0].save(function(error){
+                  console.log(arguments)
+              })
+            }
+        })
+        io.emit('addToQueue', video);
+      });
 
-      socket.on('newRoom', function (room) {
+      socket.on('newRoom', function (newRoom) {
         //FIND A WAY TO NOT ADD ON RECLICK
-        Room.find({ name: room.name }, function(err, data) {
-          if (data){
-            Room.create({ name: room.name }, function (err, data) {
+        // Check for duplicates
+        Room.findOne(newRoom, function(err, oldroom) {
+          if (oldroom === null){
+            Room.create(newRoom, function (err, newRoom) {
               if (err) {
                 console.log(err, 'ERROR:')
                 return console.error(err);
               }
               socket.leave(socket.room);
-              socket.join(data.name);
-              socket.room = data.name
-              io.sockets.in(socket.room).emit('pastMessages', data.messages)
+              socket.join(newRoom.name);
+              socket.room = newRoom.name
+              io.sockets.in(socket.room).emit('pastMessages', newRoom.messages)
             });
           }else {
-            console.log('Already in db')
+            io.sockets.in(socket.room).emit('pastMessages', oldroom.messages)
           }
         })
 
@@ -282,77 +329,60 @@
           if (err) {
             return console.error(err)
           }
-          io.emit('pastMessages', allMessages);
+          io.emit('pastMessages', allMessages.messages);
         });
       });
 
 
       socket.on('newMessage', function (message) {
+        console.log('config/express.js: socket.on("newMessage"...): message, socket.room', message,socket.room)
         Room.findOne({name: socket.room}, function(err,obj){
+          console.log(obj)
           obj.messages.push(message)
-          console.log('Messages in ' + obj.name + ': ' +obj.messages)
+          console.log('CONFIG/EXPRESS.js: socket.on("newMessage"...): Emitting "pastMessages"' + obj.name + ': ' +obj.messages)
           obj.save(function(err, data) {
             if(err){
-              console.log(err, 'ERR')
+              console.log(err, 'CONFIG/EXPRESS.js: socket.on("newMessage"...): ERROR')
             }
             io.sockets.in(socket.room).emit('pastMessages', obj.messages)
-            // Room.findOne({name: socket.room}, function(err,obj){
-            //   // io.emit('pastMessages', obj.messages)
-            //   console.log(obj.messages)
-            // }
           })
         });
-
-      	// console.log(message, 'before function');
-       //  console.log(socket.room, 'SOCKET.ROOM')
-      	// Message.create(message, function (err, message) {
-      	// 	if (err) {
-      	// 		return console.error(err);
-      	// 	}
-      	// 	console.log('posting to messages', message);
-      	// 	Message.find(function (err, allMessages) {
-      	// 		if (err) {
-      	// 			return console.error(err);
-      	// 		}
-      	// 		console.log('finding all messages with newMessage');
-      	// 		io.emit('pastMessages', allMessages);
-      	// 	});
-      	// });
       });
 
       //End Messages
 
 
-        //socket function for starting video #DD
-        socket.on('initiate', function (data) {
-          console.log('relaying player start')
-          io.emit('startVid');
-        });
+    //socket function for starting video #DD
+    socket.on('initiate', function (data) {
+      console.log('relaying player start')
+      io.sockets.in(socket.room).emit('startVid');
 
-        //socket function for pausing #DD
-        socket.on('paused', function (data) {
-          console.log('relaying pause')
-          io.emit('pauseVid');
-        });
-        //socket function for changing video #DD
-        socket.on('changingUrl', function (url, error) {
-          console.log('relaying new Url')
-          io.emit('changeVid', url);
-        });
+    });
 
-
-        socket.on('getUsers', function () {
-          Message.find(function (err, allMessages) {
-            if (err) {
-              return console.error(err)
-            }
-            console.log('finding all messages with GetUsers', allMessages)
-            io.emit('pastMessages', allMessages);
-          });
-        });
+    //socket function for pausing #DD
+    socket.on('paused', function (data) {
+      console.log('relaying pause')
+      io.sockets.in(socket.room).emit('pauseVid');
+    });
+    //socket function for changing video #DD
+    socket.on('changingUrl', function (url, error) {
+      console.log('relaying new Url')
+      io.sockets.in(socket.room).emit('changeVid', url);
+    });
 
 
-      });
+    // socket.on('getUsers', function () {
+    //   Message.find(function (err, allMessages) {
+    //     if (err) {
+    //       return console.error(err)
+    //     }
+    //     console.log('finding all messages with GetUsers', allMessages)
+    //     io.sockets.in(socket.room).emit('pastMessages', allMessages);
+    //   });
+    // });
+
+
+  });
     // Return Express server instance
     return app;
 

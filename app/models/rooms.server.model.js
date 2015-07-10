@@ -19,8 +19,7 @@
   admin: {
    type: String,     default: 'guest'
   },
-    messages: [
-  ],
+    messages: [],
     queue: [],
   created: {
     type: Date,

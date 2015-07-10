@@ -16,6 +16,7 @@ angular.module('core')
 
 
 	var socket = io.connect();
+
     socket.emit('pageLoad', 'TestUser')
     socket.on('sendingRooms', function(rooms) {
       $scope.rooms = rooms
@@ -28,8 +29,8 @@ angular.module('core')
       console.log($scope.queuedVideos)
       $scope.$apply();
     })
+    
     $scope.sendMessage = function () {
-      
       socket.emit('newMessage', chatMessage);
       $scope.message = '';
     };
