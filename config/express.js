@@ -181,8 +181,6 @@
       var Room = mongoose.model('Room')
       //Start Rooms Code
       var Rooms =[];
-<<<<<<< HEAD
-
       Room.findOne({ name: 'lobby'}, function(err, data){
        console.log('data', data)
        if (data === null){
@@ -203,22 +201,6 @@
          io.sockets.in(socket.room).emit('pastMessages', data.messages)
        }
      })
-
-||||||| merged common ancestors
-
-      Room.create({ name: 'lobby'}, function (err, data) {
-        if (err) {
-          return console.error(err);
-        }
-
-        socket.join('lobby');
-        socket.room = 'lobby'
-
-        io.sockets.in('lobby').emit('updatechat', Rooms);
-      });
-
-=======
->>>>>>> d522e5be43327d27fe80ba3b896f4d365fd65477
       socket.on('sendRooms', function(){
         io.emit('sendingRooms', Rooms)
       })
